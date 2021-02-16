@@ -4,7 +4,7 @@
 ## OVERVIEW
 Imagine that you are part of the Web Site Testing team for your employer, a major online educator. Your group has been asked to develop a software solution that can be used to automatically test the user experience and availability of the company's web site.
 You should consider the principal sources of user experience degradation and develop tests which demonstrate when this is occurring. 
-⋅⋅⋅You will design a prototype solution that can be used to execute synthetic transactions against the web site and report the results of each test. You should consider integration testing, canary red / blue testing and production monitoring. The design should describe the software architecture of the solution and give details of how it can be used by the company's Devops team to perform repeated service assurance tests against the site.
+   You will design a prototype solution that can be used to execute synthetic transactions against the web site and report the results of each test. You should consider integration testing, canary red / blue testing and production monitoring. The design should describe the software architecture of the solution and give details of how it can be used by the company's Devops team to perform repeated service assurance tests against the site.
 
 
 ## THE TEST PLATFORM
