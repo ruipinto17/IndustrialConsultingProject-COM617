@@ -1,2 +1,2 @@
-# IndustrialConsultingProject-COM617-
+# IndustrialConsultingProject-COM617
 Industrial Consulting Project - OpenNMS
