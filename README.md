@@ -14,7 +14,7 @@ You should also investigate other similar test technologies and compare your sol
 You may use the Solent University web site as your target test platform for availability tests (but not load tests). 
 
 ## RESOURCES
->> Apache Jmeter https://jmeter.apache.org/
->> JMeter: Performance and Load Testing. Smith, Michael 2019 Carpenteria, CA linkedin.com (via solent library)
->> Master Apache JMeter - From Load Testing to DevOps Master Performance Testing with JMeter By Antonio Gomes Rodrigues, Bruno Demion (Milamber), Philippe Mouawad · 2019
->> Pro Apache JMeter Web Application Performance Testing By Sai Matam, Jagdeep Jain · 2017 Apress
+Apache Jmeter https://jmeter.apache.org/  
+JMeter: Performance and Load Testing. Smith, Michael 2019 Carpenteria, CA linkedin.com (via solent library)  
+Master Apache JMeter - From Load Testing to DevOps Master Performance Testing with JMeter By Antonio Gomes Rodrigues, Bruno Demion (Milamber), Philippe Mouawad · 2019
+Pro Apache JMeter Web Application Performance Testing By Sai Matam, Jagdeep Jain · 2017 Apress
