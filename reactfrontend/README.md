@@ -1,16 +1,17 @@
 # Getting Started with Create React App
 
+## Available Scripts
 
-##Software requirements
--node.js: https://nodejs.org/en/ (Allows the dev to use the following npm and npx commands) 
+### `Software requirements`
+
+-node.js: https://nodejs.org/en/ (Allows the dev to use the following npm and npx commands)
+ 
 -vscode: https://code.visualstudio.com/
 Recomended Extensions(usually download the top item):
 	-Prettier;
 	-JavaScript ES6;
 	-ESLint;
 	-ES7 React;
-
-## Available Scripts
 
 In the project directory, you can run:
 
