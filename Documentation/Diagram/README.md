@@ -2,4 +2,4 @@
 
 ## System Diagram
 
-![](Documentation/Diagram/firstDiagram.png)
+![](Diagram/firstDiagram.png)
