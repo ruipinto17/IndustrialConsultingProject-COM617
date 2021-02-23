@@ -3,7 +3,11 @@
 
 | Syntax      | Description |
 |   :----:    |    :----:   |
-| Header      | -	Unit test |
+| -	Create a test plan
+-	Canary testing
+-	Green/blue/red testing
+-	Integration testing
+      | -	Unit test |
 | Paragraph   | Text        |
 | Paragraph   | Text        |
 | Paragraph   | Text        |
