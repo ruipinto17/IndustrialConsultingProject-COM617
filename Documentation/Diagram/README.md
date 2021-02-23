@@ -16,10 +16,8 @@
 
 ## Use-Case Diagrams
 ### (v1)
-<details open>
-<summary>
-Expand
-</summary>
+<details>
+  <summary>Click to expand!</summary>
 <img src="use_cases/useCaseDiagramV1.png" >
 </details> 
 
