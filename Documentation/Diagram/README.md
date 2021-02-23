@@ -18,7 +18,7 @@
 ### (v1)
 <details open>
 <summary>
-<a class="btnfire small stroke"><em class="fas fa-chevron-circle-down"></em>&nbsp;&nbsp;Expand</a
+Expand
 </summary>
 <img src="use_cases/useCaseDiagramV1.png" >
 </details> 
