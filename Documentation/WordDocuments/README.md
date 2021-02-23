@@ -3,15 +3,15 @@
 
 | Syntax      | Description |
 |   :----:    |    :----:   |
-| -	Create a test plan
--	Canary testing
--	Green/blue/red testing
--	Integration testing   | -	Unit test |
-| Paragraph   | Text        |
-| Paragraph   | Text        |
-| Paragraph   | Text        |
-| Paragraph   | Text        |
-| Paragraph   | Text        |
+| -	Create a test plan      | -	Unit test |
+|-	Canary testing
+|-	Green/blue/red testing
+|-	Integration testing
+| Paragraph   | Text                      |
+| Paragraph   | Text                      |
+| Paragraph   | Text                      |
+| Paragraph   | Text                      |
+| Paragraph   | Text                      |
 
 
 
