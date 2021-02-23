@@ -10,7 +10,7 @@
 |- Visually represent stored metrics in graphics with Grafana||
 |- Developing a website to display graphics from grafana.||
 |- Work on API requests from grafana in order to display the graphs||
-|<p>- Diagrams: <br> </p><p>&emsp;- Use case scenarios</p><p>&emsp;- Sequence diagram</p><p>&emsp;- Architecture/Deployment Diagram</p><p>&emsp;- Robustness diagram (maybe)</p>||
+|<p>- Diagrams:</p><p>&emsp;- Use case scenarios</p><p>&emsp;- Sequence diagram</p><p>&emsp;- Architecture/Deployment Diagram</p><p>&emsp;- Robustness diagram (maybe)</p>||
 
 
 Application Goal:
