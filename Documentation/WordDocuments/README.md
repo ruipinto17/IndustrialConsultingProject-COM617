@@ -13,7 +13,7 @@
 |<p>- Diagrams: </p><p>&emsp;- Use case scenarios</p><p>&emsp;- Sequence diagram</p><p>&emsp;- Architecture/Deployment Diagram</p><p>&emsp;- Robustness diagram (maybe)</p>||
 
 
-Application Goal
+Application Goal:
 
 - Solution that continuously displays UX and availability monitoring test results on a web page.
 
