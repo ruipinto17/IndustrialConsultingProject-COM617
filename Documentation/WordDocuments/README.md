@@ -3,7 +3,7 @@
 
 | Syntax      | Description |
 |   :----:    |    :----:   |
-| Header      | -	Unit test       |
+| Header      | -	Unit test |
 | Paragraph   | Text        |
 | Paragraph   | Text        |
 | Paragraph   | Text        |
