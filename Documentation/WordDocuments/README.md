@@ -3,10 +3,7 @@
 
 | Syntax      | Description |
 |   :----:    |    :----:   |
-| -	Create a test plan      | -	Unit test |
--	Canary testing            |
--	Green/blue/red testing    |
--	Integration testing       |
+| -	Create a test plan       -	Canary testing            -	Green/blue/red testing    -	Integration testing -	Unit test |
 | Paragraph   | Text                      |
 | Paragraph   | Text                      |
 | Paragraph   | Text                      |
