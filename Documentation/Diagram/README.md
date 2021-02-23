@@ -14,11 +14,10 @@
 ### (v2)
 <img src="robustness_diagrams/robustnessDiagramV2.png" >
 
-
-<details open>
-<summary>Already open...</summary>
 ## Use-Case Diagrams
 ### (v1)
+<details open>
+<summary>Expand</summary>
 <img src="use_cases/useCaseDiagramV1.png" >
 </details> 
 
