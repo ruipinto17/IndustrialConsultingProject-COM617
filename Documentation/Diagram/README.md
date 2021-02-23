@@ -9,7 +9,7 @@
 
 ## Robustness Diagrams
 ### (v1)
-<img src="robustnessDiagramV1.png" >
+<img src="robustness_diagrams/robustnessDiagramV1.png" >
 
 ### (v2)
-<img src="robustnessDiagramV2.png" >
+<img src="robustness_diagrams/robustnessDiagramV2.png" >
