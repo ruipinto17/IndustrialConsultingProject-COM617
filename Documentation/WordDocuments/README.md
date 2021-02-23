@@ -37,23 +37,16 @@ How are we evaluating it
 **Thu:** 2pm - ?
 
 notes 16/02/21 - 
-
 docker compose to spin up container
-
 jmeter
-
 influxdb
-
 grafana
 
 rest call to push JMX to application
 
-overall description of project
-
+overall description of project:
 system diagram 
-
 project plan
-
 open GitHub
 
 create template for report and presentation and assign parts to team members
