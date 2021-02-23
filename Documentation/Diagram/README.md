@@ -17,7 +17,9 @@
 ## Use-Case Diagrams
 ### (v1)
 <details open>
-<summary>Expand</summary>
+<summary>
+<a class="btnfire small stroke"><em class="fas fa-chevron-circle-down"></em>&nbsp;&nbsp;Expand</a
+</summary>
 <img src="use_cases/useCaseDiagramV1.png" >
 </details> 
 
