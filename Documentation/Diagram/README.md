@@ -2,4 +2,4 @@
 
 ## System Diagram
 
-<img src="Diagram/firstDiagram.png" >
+<img src="firstDiagram.png" >
