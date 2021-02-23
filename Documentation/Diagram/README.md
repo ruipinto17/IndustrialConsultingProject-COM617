@@ -13,3 +13,9 @@
 
 ### (v2)
 <img src="robustness_diagrams/robustnessDiagramV2.png" >
+
+## Use-Case Diagrams
+### (v1)
+<img src="use_cases/useCaseDiagramV1.png" >
+
+
