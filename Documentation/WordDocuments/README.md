@@ -96,7 +96,7 @@ Several visualizations (graphs, charts, etc)//User monitoring
 ||3) Grafana displays visualizations for the test results|
 
 ### Initial System Architecture Diagram
-<img src="WordDocuments/Documentation/Diagram/firstDiagram.png" >
+<img src="firstDiagram.png" >
 
 
 
