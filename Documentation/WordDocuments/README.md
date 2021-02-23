@@ -63,9 +63,7 @@ presentation on 02/03 with openNMS
 **Use Cases**
 
 User Inputs custom test script into website
-
 Several visualizations (graphs, charts, etc)
-
 Execute periodically
 
 
@@ -97,10 +95,10 @@ Several visualizations (graphs, charts, etc)//User monitoring
 ||2) Grafana loads the influxDB containing the test results|
 ||3) Grafana displays visualizations for the test results|
 
-
+### Initial System Architecture Diagram
 ![](Aspose.Words.8f3d399c-b705-4c45-9c26-27566a682de9.001.png)
 
-Initial System Architecture Diagram
+
 
 
 
