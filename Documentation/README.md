@@ -6,7 +6,7 @@
 
 
 ### (systemDiagram)
-<img src="Diagram/systemDiagram.png" width="300" height="300" >
+<img src="Diagram/systemDiagram.png" width="1000" height="500" >
 
 
 ## Robustness Diagrams
