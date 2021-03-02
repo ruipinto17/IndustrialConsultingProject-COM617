@@ -2,11 +2,11 @@
 
 ## System Diagram
 ### (firstDiagram)
-<img src="Diagram/firstDiagram.png" >
+<img src="Diagram/firstDiagram.png" width="300" height="300" >
 
 
 ### (systemDiagram)
-<img src="Diagram/systemDiagram.png" >
+<img src="Diagram/systemDiagram.png" width="300" height="300" >
 
 
 ## Robustness Diagrams
