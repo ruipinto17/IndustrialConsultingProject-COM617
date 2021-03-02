@@ -2,7 +2,7 @@
 
 ## System Diagram
 ### (firstDiagram)
-<img src="Diagram/firstDiagram.png" width="300" height="300" >
+<img src="Diagram/firstDiagram.png" height="300" >
 
 
 ### (systemDiagram)
