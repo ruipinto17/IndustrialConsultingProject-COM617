@@ -1,9 +1,6 @@
 # Documentation Images
 
 ## System Diagram
-### (firstDiagram)
-<img src="Diagrams/system_diagrams/firstDiagram.png" width="1000" height="500" >
-
 
 ### (systemDiagram)
 <img src="Diagrams/system_diagrams/systemDiagram.png" width="1000" height="500" >
