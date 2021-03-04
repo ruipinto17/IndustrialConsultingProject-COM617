@@ -2,26 +2,26 @@
 
 ## System Diagram
 ### (firstDiagram)
-<img src="Diagram/firstDiagram.png" width="1000" height="500" >
+<img src="Diagrams/system_diagrams/firstDiagram.png" width="1000" height="500" >
 
 
 ### (systemDiagram)
-<img src="Diagram/systemDiagram.png" width="1000" height="500" >
+<img src="Diagrams/system_diagrams/systemDiagram.png" width="1000" height="500" >
 
 
 ## Robustness Diagrams
 ### (v1)
-<img src="Diagram/robustness_diagrams/robustnessDiagramV1.png" >
+<img src="Diagrams/robustness_diagrams/robustnessDiagramV1.png" >
 
 
 ### (v2)
 
-<img src="Diagram/robustness_diagrams/robustnessDiagramV2.png" >
+<img src="Diagrams/robustness_diagrams/robustnessDiagramV2.png" >
 
 
 ## Use-Case Diagrams
 ### (v1)
-<img src="Diagram/use_cases/useCaseDiagramV1.png" >
+<img src="Diagrams/use_cases/useCaseDiagramV1.png" >
 
 
 
