@@ -20,5 +20,8 @@
 ### (v1)
 <img src="Diagrams/use_cases/useCaseDiagramV1.png" >
 
+### (v2)
+<img src="Diagrams/use_cases/useCaseDiagramV2.png" >
+
 
 
