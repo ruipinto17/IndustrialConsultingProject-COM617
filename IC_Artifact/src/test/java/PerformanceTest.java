@@ -8,6 +8,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
+import org.apache.jmeter.engine.JMeterEngine;
 import org.apache.jmeter.engine.StandardJMeterEngine;
 import org.apache.jmeter.reporters.ResultCollector;
 import org.apache.jmeter.reporters.Summariser;
@@ -15,6 +16,8 @@ import org.apache.jmeter.save.SaveService;
 import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.collections.HashTree;
 import org.junit.Test;
+import static us.abstracta.jmeter.javadsl.JmeterDsl.httpSampler;
+import us.abstracta.jmeter.javadsl.core.TestPlanStats;
 
 /**
  *
@@ -38,7 +41,7 @@ public class PerformanceTest {
 //    assertThat(stats.overall().elapsedTimePercentile99()).isLessThan(Duration.ofSeconds(5));
 //  }
   
-  // Main Test
+  // Main Test - JMeter will be placed on C: on host and used from there
   @Test
   public void jmeterPerformance() throws IOException {
     StandardJMeterEngine jmeter = new StandardJMeterEngine();
@@ -49,7 +52,6 @@ public class PerformanceTest {
     SaveService.loadProperties();
     
     HashTree testPlanTree = SaveService.loadTree(new File("./src/test/resources/solentTest.jmx")); // /path/to/your/jmeter/extras/Test.jmx
-
     Summariser summer = null;
     String summariserName = JMeterUtils.getPropDefault("summariser.name", "summary");
     if (summariserName.length() > 0) {
@@ -64,4 +66,5 @@ public class PerformanceTest {
     jmeter.configure(testPlanTree);
     jmeter.run();
   }
+  
 }
