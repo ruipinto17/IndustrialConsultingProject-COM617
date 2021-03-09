@@ -1,3 +1,5 @@
+package com.ic.icproject;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,16 +10,12 @@
 import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
-import org.apache.jmeter.engine.JMeterEngine;
 import org.apache.jmeter.engine.StandardJMeterEngine;
 import org.apache.jmeter.reporters.ResultCollector;
 import org.apache.jmeter.reporters.Summariser;
 import org.apache.jmeter.save.SaveService;
 import org.apache.jmeter.util.JMeterUtils;
 import org.apache.jorphan.collections.HashTree;
-import org.junit.Test;
-import static us.abstracta.jmeter.javadsl.JmeterDsl.httpSampler;
-import us.abstracta.jmeter.javadsl.core.TestPlanStats;
 
 /**
  *
@@ -26,7 +24,6 @@ import us.abstracta.jmeter.javadsl.core.TestPlanStats;
 
 public class PerformanceTest {
     
-
     // Ignore for now, used to run test without JMETER?
     
 //      @Test
@@ -42,16 +39,15 @@ public class PerformanceTest {
 //  }
   
   // Main Test - JMeter will be placed on C: on host and used from there
-  @Test
-  public void jmeterPerformance() throws IOException {
-    StandardJMeterEngine jmeter = new StandardJMeterEngine();
+    public static void main(String[] arg) throws IOException
+    {
+        StandardJMeterEngine jmeter = new StandardJMeterEngine();
     JMeterUtils.loadJMeterProperties("D:\\Programs\\apache-jmeter-5.4.1\\bin\\jmeter.properties"); // /path/to/your/jmeter/bin/jmeter.properties
     JMeterUtils.setJMeterHome("D:\\Programs\\apache-jmeter-5.4.1"); // /path/to/your/jmeter
     JMeterUtils.initLocale();
-    
     SaveService.loadProperties();
     
-    HashTree testPlanTree = SaveService.loadTree(new File("./src/test/resources/solentTest.jmx")); // /path/to/your/jmeter/extras/Test.jmx
+    HashTree testPlanTree = SaveService.loadTree(new File("./src/main/resources/solentTest.jmx")); // /path/to/your/jmeter/extras/Test.jmx
     Summariser summer = null;
     String summariserName = JMeterUtils.getPropDefault("summariser.name", "summary");
     if (summariserName.length() > 0) {
@@ -65,6 +61,7 @@ public class PerformanceTest {
 
     jmeter.configure(testPlanTree);
     jmeter.run();
-  }
+    }
+
   
 }
