@@ -1,12 +1,17 @@
-  
 version: "3"
 services:
+  jmeter:
+    build: ./IC_Artifact/
+    container_name: jmeter
+    depends_on:
+      - influxdb
+
   grafana:
     image: grafana/grafana
     container_name: grafana
     restart: always
     ports:
-      - 3000:3000
+      - 80:3000
     networks:
       - grafana_network
     volumes:
@@ -14,13 +19,12 @@ services:
     depends_on:
       - influxdb
 
-
   influxdb:
     image: influxdb:latest
     container_name: influxdb
     restart: always
     ports:
-      - 8086:8086
+      - 443:8086
     networks:
       - grafana_network
     volumes:
@@ -30,7 +34,7 @@ services:
       - INFLUXDB_USER=ICPuser
       - INFLUXDB_USER_PASSWORD=ICPpass
       - INFLUXDB_ADMIN_ENABLED=true
-      - INFLUXDB_ADMIN_USER=admin 
+      - INFLUXDB_ADMIN_USER=admin
       - INFLUXDB_ADMIN_PASSWORD=admin
 networks:
   grafana_network:
