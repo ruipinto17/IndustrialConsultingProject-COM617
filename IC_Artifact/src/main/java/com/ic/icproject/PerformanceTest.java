@@ -41,9 +41,11 @@ public class PerformanceTest {
   // Main Test - JMeter will be placed on C: on host and used from there
     public static void main(String[] arg) throws IOException
     {
+        try{
         StandardJMeterEngine jmeter = new StandardJMeterEngine();
-    JMeterUtils.loadJMeterProperties("D:\\Programs\\apache-jmeter-5.4.1\\bin\\jmeter.properties"); // /path/to/your/jmeter/bin/jmeter.properties
-    JMeterUtils.setJMeterHome("D:\\Programs\\apache-jmeter-5.4.1"); // /path/to/your/jmeter
+      
+    JMeterUtils.loadJMeterProperties("./src/main/resources/apache-jmeter-5.4.1/bin/jmeter.properties"); // /path/to/your/jmeter/bin/jmeter.properties
+    JMeterUtils.setJMeterHome("./src/main/resources/apache-jmeter-5.4.1"); // /path/to/your/jmeter
     JMeterUtils.initLocale();
     SaveService.loadProperties();
     
@@ -61,7 +63,10 @@ public class PerformanceTest {
 
     jmeter.configure(testPlanTree);
     jmeter.run();
+    
+          } catch(IOException t){
+            System.out.print(t);
+        }
     }
-
   
 }
