@@ -22,7 +22,7 @@ import org.apache.jorphan.collections.HashTree;
  * @author leite
  */
 
-public class PerformanceTest {
+public class PerformanceTest implements Runnable {
     
     // Ignore for now, used to run test without JMETER?
     
@@ -39,8 +39,8 @@ public class PerformanceTest {
 //  }
   
   // Main Test - JMeter will be placed on C: on host and used from there
-    public static void main(String[] arg) throws IOException
-    {
+    @Override
+    public void run(){
         try{
         StandardJMeterEngine jmeter = new StandardJMeterEngine();
       
