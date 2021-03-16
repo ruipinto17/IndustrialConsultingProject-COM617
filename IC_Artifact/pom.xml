@@ -33,14 +33,14 @@
     </dependencies>
     
     <build>
-  <plugins>
+  <plugins> 
     
      <plugin>
        <groupId>org.codehaus.mojo</groupId>
   <artifactId>exec-maven-plugin</artifactId>
   <version>1.4.0</version>
   <configuration>
-    <mainClass>com.ic.icproject.PerformanceTest</mainClass>
+    <mainClass>com.ic.icproject.ThreadPool</mainClass>
   </configuration>
       </plugin>
   </plugins>

@@ -16,8 +16,12 @@ import java.util.concurrent.TimeUnit;
 public class ThreadPool {
 
     public static void main(String[] args) {
+        try{
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
         PerformanceTest task = new PerformanceTest();
         exec.scheduleAtFixedRate(task, 0, 2, TimeUnit.MINUTES);
+        } catch(Exception e){
+            System.out.println(e);
+        }
     }
 }

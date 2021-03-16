@@ -49,7 +49,7 @@ public class PerformanceTest implements Runnable {
     JMeterUtils.initLocale();
     SaveService.loadProperties();
     
-    HashTree testPlanTree = SaveService.loadTree(new File("./src/main/resources/solentTest.jmx")); // /path/to/your/jmeter/extras/Test.jmx
+    HashTree testPlanTree = SaveService.loadTree(new File("./src/main/resources/BlazeMeterTest.jmx")); // /path/to/your/jmeter/extras/Test.jmx
     Summariser summer = null;
     String summariserName = JMeterUtils.getPropDefault("summariser.name", "summary");
     if (summariserName.length() > 0) {
