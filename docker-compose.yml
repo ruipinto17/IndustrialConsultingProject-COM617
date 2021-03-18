@@ -1,10 +1,11 @@
 version: "3"
-services:
-  jmeter:
-    build: ./IC_Artifact/
-    container_name: jmeter
-    depends_on:
-      - influxdb
+services: 
+ jmeter:
+   image: jmeterimage
+   container_name: jmeter
+   depends_on:
+     - influxdb
+     - grafana
 
   grafana:
     image: grafana/grafana
@@ -16,11 +17,16 @@ services:
       - grafana_network
     volumes:
       - grafana_data:/var/lib/grafana
+      - ./grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana.ini:/usr/share/grafana/conf/custom.ini
+      - ./grafana.ini:/usr/share/grafana/conf/sample.ini
+    environment:
+      - GF_INSTALL_PLUGINS=cloudspout-button-panel
     depends_on:
       - influxdb
 
   influxdb:
-    image: influxdb:latest
+    image: influxdb:1.8.4
     container_name: influxdb
     restart: always
     ports:
@@ -41,3 +47,4 @@ networks:
 volumes:
   grafana_data:
   influxdb_data:
+
