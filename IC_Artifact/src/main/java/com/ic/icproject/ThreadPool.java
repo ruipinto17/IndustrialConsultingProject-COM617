@@ -19,7 +19,7 @@ public class ThreadPool {
         try{
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
         PerformanceTest task = new PerformanceTest();
-        exec.scheduleAtFixedRate(task, 5, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(task, 5, 60, TimeUnit.SECONDS);
         } catch(Exception e){
             System.out.println(e);
         }

@@ -1,0 +1,18 @@
+name: Command via SSH
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ls -a
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: ls -a
+          host: ${{ secrets.HOST }}
+          username: Team12
+          password: ${{ secrets.PASSWORD }}          
+        env:
+          CI: true
