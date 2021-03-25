@@ -41,10 +41,11 @@ jobs:
       - name: ls -a      
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: ls -a                    
+          #command: ls -a                    
+          command: cd Documents/IndustrialConsultingProject-COM617 || ls
           host: ${{ secrets.HOST }}
           username: Team12
           password: ${{ secrets.PASSWORD }}      
-          run: cd Documents/IndustrialConsultingProject-COM617 || ls          
+          #run: cd Documents/IndustrialConsultingProject-COM617 || ls          
         env:
           CI: true
