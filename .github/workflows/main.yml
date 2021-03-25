@@ -34,14 +34,15 @@ jobs:
       run: mvn -B package --file IC_Artifact/pom.xml
 
 
-  build:
+  commands-on-server:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ls -a
+      - name: ls -a      
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: ls -a
+          run: cd Documents/IndustrialConsultingProject-COM617
           host: ${{ secrets.HOST }}
           username: Team12
           password: ${{ secrets.PASSWORD }}          
