@@ -46,7 +46,9 @@ jobs:
           host: ${{ secrets.HOST }}
           username: Team12
           password: ${{ secrets.PASSWORD }}
-          script: cd Documents/IndustrialConsultingProject-COM617 | ls
+          script: | 
+            cd Documents/IndustrialConsultingProject-COM617
+            ls
           #run: cd Documents/IndustrialConsultingProject-COM617 || ls          
         env:
           CI: true
