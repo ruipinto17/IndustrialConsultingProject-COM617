@@ -1,6 +1,12 @@
-name: Command via SSH
+#CI/CD actions script
 
-on: push
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
