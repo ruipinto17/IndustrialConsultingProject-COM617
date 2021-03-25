@@ -38,8 +38,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ls -a      
-        uses: garygrossgarten/github-action-ssh@release
+      - name: executing remote ssh commands      
+        uses: appleboy/ssh-action@master
         with:
           #command: ls -a                    
           #command: cd Documents/IndustrialConsultingProject-COM617 | ls
