@@ -23,15 +23,15 @@ jobs:
       with:
         java-version: 11
         
-    #- name: Cache maven packages to speed up build
-      #uses: actions/cache@v1
-      #with:
-        #path: ~/.m2
-        #key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        #restore-keys: ${{ runner.os }}-m2
+    - name: Cache maven packages to speed up build
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
         
-    #- name: Maven Build
-      #run: mvn -B verify --file pom.xml
+    - name: Maven Build
+      run: mvn -B package --file IC_Artifact/pom.xml
 
 
   build:
