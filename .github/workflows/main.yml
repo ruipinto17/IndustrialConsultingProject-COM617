@@ -29,8 +29,8 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
         
-    - name: Build and test project with Maven
-      run: mvn -B package --file pom.xml
+    - name: Maven Build
+      run: mvn -B package --file IndustrialConsultingProject-COM617\IC_Artifact\pom.xml
 
 
   build:
