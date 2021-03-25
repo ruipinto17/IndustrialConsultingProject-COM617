@@ -34,16 +34,21 @@ jobs:
       run: mvn -B package --file IC_Artifact/pom.xml
 
 
-  build:
+  commands-on-server:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ls -a
-        uses: garygrossgarten/github-action-ssh@release
+      - name: executing remote ssh commands      
+        uses: appleboy/ssh-action@master
         with:
-          command: ls -a
+          #command: ls -a                    
+          #command: cd Documents/IndustrialConsultingProject-COM617 | ls
           host: ${{ secrets.HOST }}
           username: Team12
-          password: ${{ secrets.PASSWORD }}          
+          password: ${{ secrets.PASSWORD }}
+          script: | 
+            cd Documents/IndustrialConsultingProject-COM617
+            ls
+          #run: cd Documents/IndustrialConsultingProject-COM617 || ls          
         env:
           CI: true
