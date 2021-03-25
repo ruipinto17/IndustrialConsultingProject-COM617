@@ -33,7 +33,7 @@ jobs:
         #restore-keys: ${{ runner.os }}-m2
         
     - name: Maven Build
-      run: mvn -B package --file IndustrialConsultingProject-COM617\IC_Artifact\pom.xml
+      run: mvn -B package --file pom.xml
 
 
   build:
