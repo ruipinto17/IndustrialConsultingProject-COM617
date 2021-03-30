@@ -48,10 +48,8 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: | 
             cd Documents/IndustrialConsultingProject-COM617
-            ls
-            git pull
-            cd IC_Artifact            
-          #run: cd Documents/IndustrialConsultingProject-COM617 || ls  
-          run: echo "made it here"
+            ls            
+            cd IC_Artifact  
+          #run: cd Documents/IndustrialConsultingProject-COM617 || ls            
         env:
           CI: true
