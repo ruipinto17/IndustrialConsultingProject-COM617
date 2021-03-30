@@ -48,6 +48,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: | 
             cd Documents/IndustrialConsultingProject-COM617
+            git pull
             cd IC_Artifact
             ls
           #run: cd Documents/IndustrialConsultingProject-COM617 || ls            
