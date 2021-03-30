@@ -51,6 +51,6 @@ jobs:
             git pull
             cd IC_Artifact
             ls
-          #run: cd Documents/IndustrialConsultingProject-COM617 || ls            
+          #run: cd Documents/IndustrialConsultingProject-COM61 || ls            
         env:
           CI: true
