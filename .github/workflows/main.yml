@@ -49,7 +49,8 @@ jobs:
           script: | 
             cd Documents/IndustrialConsultingProject-COM617
             ls            
-            cd IC_Artifact  
+            cd IC_Artifact
+            ls
           #run: cd Documents/IndustrialConsultingProject-COM617 || ls            
         env:
           CI: true
