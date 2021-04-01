@@ -7,8 +7,6 @@ on:
   #The workflow is executed on every push and pull request for the main branch
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
 
