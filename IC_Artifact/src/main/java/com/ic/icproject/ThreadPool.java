@@ -18,8 +18,15 @@ public class ThreadPool {
     public static void main(String[] args) {
         try{
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
-        PerformanceTest task = new PerformanceTest();
-        exec.scheduleAtFixedRate(task, 5, 60, TimeUnit.SECONDS);
+        
+        String PATHTOTESTPAGE = "https://blazedemo.com/reserve.php";
+        String METHOD = "POST";
+        String Website = "https://blazedemo.com";
+        String Thread = "10";
+        String Rampup = "5";
+        
+        PerformanceTest task = new PerformanceTest(PATHTOTESTPAGE,METHOD,Website, Thread,Rampup);
+        exec.scheduleAtFixedRate(task, 5, 5, TimeUnit.SECONDS);
         } catch(Exception e){
             System.out.println(e);
         }
