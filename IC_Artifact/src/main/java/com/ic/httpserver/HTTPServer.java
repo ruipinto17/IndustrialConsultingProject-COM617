@@ -5,6 +5,7 @@
  */
 package com.ic.httpserver;
 
+import com.ic.icproject.PerformanceTest;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -21,6 +22,9 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -30,6 +34,8 @@ public class HTTPServer {
 
     public static void main(String args[]) throws IOException {
         try {
+            
+            Socket client;
 
             System.out.print("Starting HTTP Server\n");
 
@@ -41,7 +47,7 @@ public class HTTPServer {
             // Loop for handling connections
             System.out.print("Loop Starting\n");
 
-            Socket client = ss.accept();
+             client = ss.accept();
             System.out.print("Connections Established\n");
 
             DataInputStream in = new DataInputStream(new BufferedInputStream(client.getInputStream()));
@@ -55,21 +61,51 @@ public class HTTPServer {
             System.out.print("Extracting Parameters\n");
             int i = 0;
             String line;
-            while ((line = in.readLine()) != null) {
+            String end = "end" ;
+            while ((line = in.readLine()) != null && end == "end") {
                 if (line.toLowerCase().indexOf("thread") != -1) {
                     String[] linesplit = line.split(" ");
                     String thread = linesplit[1];
                     System.out.println(thread);
                 } else if (line.toLowerCase().indexOf("url") != -1) {
                     String[] linesplit = line.split(" ");
-                    String url = linesplit[1];
-                    System.out.println(url);
+                    end = linesplit[1];
+                    System.out.println(end);
+                    
                 }
+               
                 // Now loop again, waiting for the next connection
             }
+            ss.close();
+            
+            if (ss.isClosed())
+            {
+                run();
+            }           
+          
+            
+                        
         } catch (IOException e) {
             System.err.println(e);
             System.err.println("Usage: java HttpMirror 5009");
         }
+    }
+    
+    public static void run() {
+         try{
+        ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
+        
+        String PATHTOTESTPAGE = "https://blazedemo.com/reserve.php";
+        String METHOD = "POST";
+        String Website = "https://blazedemo.com";
+        String Thread = "10";
+        String Rampup = "5";
+        
+        PerformanceTest task = new PerformanceTest(PATHTOTESTPAGE,METHOD,Website, Thread,Rampup);
+        exec.scheduleAtFixedRate(task, 5, 5, TimeUnit.SECONDS);
+        } catch(Exception e){
+            System.out.println(e);
+        }
+        
     }
 }

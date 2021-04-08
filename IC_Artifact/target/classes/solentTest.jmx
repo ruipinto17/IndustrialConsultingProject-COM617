@@ -129,7 +129,7 @@
               </elementProp>
               <elementProp name="influxdbUrl" elementType="Argument">
                 <stringProp name="Argument.name">influxdbUrl</stringProp>
-                <stringProp name="Argument.value">http://webmontioring.uksouth.cloudapp.azure.com:443/write?db=jmeter</stringProp>
+                <stringProp name="Argument.value">http://webmontoringtool.uksouth.cloudapp.azure.com:443/write?db=jmeter</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="application" elementType="Argument">
