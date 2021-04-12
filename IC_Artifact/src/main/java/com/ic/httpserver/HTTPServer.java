@@ -7,21 +7,11 @@ package com.ic.httpserver;
 
 import com.ic.icproject.PerformanceTest;
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URI;
-import java.net.URLEncoder;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -32,9 +22,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class HTTPServer {
 
+    // Parameters to be passed to PerformanceTest
+    public static String targetUrl = "https://blazedemo.com";
+    public static String threads = "10";
+    public static String rampup = "5";
+    public static String users = null;
+
     public static void main(String args[]) throws IOException {
         try {
-            
             Socket client;
 
             System.out.print("Starting HTTP Server\n");
@@ -47,7 +42,7 @@ public class HTTPServer {
             // Loop for handling connections
             System.out.print("Loop Starting\n");
 
-             client = ss.accept();
+            client = ss.accept();
             System.out.print("Connections Established\n");
 
             DataInputStream in = new DataInputStream(new BufferedInputStream(client.getInputStream()));
@@ -59,53 +54,56 @@ public class HTTPServer {
             out.print("\r\n");
 
             System.out.print("Extracting Parameters\n");
-            int i = 0;
             String line;
-            String end = "end" ;
-            while ((line = in.readLine()) != null && end == "end") {
-                if (line.toLowerCase().indexOf("thread") != -1) {
+
+            while ((line = in.readLine()) != null) {
+                if (line.toLowerCase().indexOf("targeturl") != -1) {
                     String[] linesplit = line.split(" ");
-                    String thread = linesplit[1];
-                    System.out.println(thread);
-                } else if (line.toLowerCase().indexOf("url") != -1) {
+                    targetUrl = linesplit[1];
+                    System.out.println("TargetUrl - " + targetUrl);
+                } else if (line.toLowerCase().indexOf("threads") != -1) {
                     String[] linesplit = line.split(" ");
-                    end = linesplit[1];
-                    System.out.println(end);
-                    
+                    threads = linesplit[1];
+                    System.out.println("Threads - " + threads);
+                } else if (line.toLowerCase().indexOf("rampup") != -1) {
+                    String[] linesplit = line.split(" ");
+                    rampup = linesplit[1];
+                    System.out.println("Rampup - " + rampup);
+                } else if (line.toLowerCase().indexOf("users") != -1) {
+                    String[] linesplit = line.split(" ");
+                    users = linesplit[1];
+                    System.out.println("Users - " + users);
+                } else if (line.isEmpty()) {
+                    break;
                 }
-               
-                // Now loop again, waiting for the next connection
             }
             ss.close();
-            
-            if (ss.isClosed())
-            {
+
+            if (ss.isClosed()) {
                 run();
-            }           
-          
-            
-                        
+            }
+
         } catch (IOException e) {
             System.err.println(e);
-            System.err.println("Usage: java HttpMirror 5009");
+            System.err.println("Usage: java HttpMirror 5008");
         }
     }
-    
+
     public static void run() {
-         try{
-        ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
-        
-        String PATHTOTESTPAGE = "https://blazedemo.com/reserve.php";
-        String METHOD = "POST";
-        String Website = "https://blazedemo.com";
-        String Thread = "10";
-        String Rampup = "5";
-        
-        PerformanceTest task = new PerformanceTest(PATHTOTESTPAGE,METHOD,Website, Thread,Rampup);
-        exec.scheduleAtFixedRate(task, 5, 5, TimeUnit.SECONDS);
-        } catch(Exception e){
+        try {
+            ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
+
+//            String PATHTOTESTPAGE = "https://blazedemo.com/reserve.php";
+            String METHOD = "POST";
+//            String Website = "https://blazedemo.com";
+//            String Thread = "4";
+//            String Rampup = "30";
+
+            PerformanceTest task = new PerformanceTest(targetUrl, METHOD, targetUrl, threads, rampup);
+            exec.scheduleAtFixedRate(task, 5, Long.parseLong(rampup), TimeUnit.SECONDS);
+        } catch (Exception e) {
             System.out.println(e);
         }
-        
+
     }
 }
