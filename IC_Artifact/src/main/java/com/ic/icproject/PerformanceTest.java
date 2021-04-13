@@ -22,15 +22,12 @@ import org.apache.jorphan.collections.HashTree;
  */
 public class PerformanceTest implements Runnable {
     
-       public String PATHTOTESTPAGE;
-    public String METHOD;
     public String Website;
     public String Thread;
     public String Rampup;
 
-    public PerformanceTest(String PATHTOTESTPAGE, String METHOD, String Website, String Thread, String Rampup) {
-        this.PATHTOTESTPAGE = PATHTOTESTPAGE;
-        this.METHOD = METHOD;
+    public PerformanceTest(String Website, String Thread, String Rampup) {
+
         this.Website = Website;
         this.Thread = Thread;
         this.Rampup = Rampup;
@@ -76,8 +73,6 @@ public class PerformanceTest implements Runnable {
             testPlanTree.add(testPlanTree.getArray()[0], logger);
 
             Arguments args = new Arguments();
-            args.addArgument("PATHTOTESTPAGE", this.PATHTOTESTPAGE);
-            args.addArgument("METHOD", this.METHOD);
             args.addArgument("Website", this.Website);
             args.addArgument("Threads", this.Thread);
             args.addArgument("Ramp-up-Time", this.Rampup);

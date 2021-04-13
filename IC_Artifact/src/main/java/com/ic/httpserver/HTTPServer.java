@@ -99,8 +99,8 @@ public class HTTPServer {
 //            String Thread = "4";
 //            String Rampup = "30";
 
-            PerformanceTest task = new PerformanceTest(targetUrl, METHOD, targetUrl, threads, rampup);
-            exec.scheduleAtFixedRate(task, 5, Long.parseLong(rampup), TimeUnit.SECONDS);
+            PerformanceTest task = new PerformanceTest(targetUrl, threads, rampup);
+            exec.scheduleAtFixedRate(task, 0, 5, TimeUnit.SECONDS);
         } catch (Exception e) {
             System.out.println(e);
         }
