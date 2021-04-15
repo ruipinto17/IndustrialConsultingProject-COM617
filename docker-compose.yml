@@ -1,22 +1,6 @@
 version: "3"
 
 services:
-  frontend:
-    image: frontend
-    container_name: webUI
-    ports:
-      - 3000:3000
-    depends_on: -jmeter
-
-services: 
- frontend:
-  image: frontend
-  container_name: webUI
-  ports:
-    - 3000:3000
-  depends_on:
-    - jmeter
-
   jmeter:
     image: jmeterserver
     container_name: jmeter
@@ -60,6 +44,15 @@ services:
       - INFLUXDB_ADMIN_ENABLED=true
       - INFLUXDB_ADMIN_USER=admin
       - INFLUXDB_ADMIN_PASSWORD=admin
+
+  frontend:
+    image: frontend
+    container_name: webUI
+    ports:
+      - 3000:3000
+    depends_on:
+      - jmeter
+
 networks:
   grafana_network:
 volumes:
