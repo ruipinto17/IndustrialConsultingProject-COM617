@@ -6,7 +6,7 @@ services:
     container_name: grafana
     restart: always
     ports:
-      - 80:3000
+      - 3000:3000
     networks:
       - grafana_network
     volumes:
@@ -47,7 +47,7 @@ services:
     image: frontend
     container_name: webUI
     ports:
-      - 3000:3000
+      - 80:3000
 
 networks:
   grafana_network:
