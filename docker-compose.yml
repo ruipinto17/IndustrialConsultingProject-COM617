@@ -1,8 +1,18 @@
 version: "3"
 services: 
+ frontend:
+  image: frontend
+  container_name: webUI
+  ports:
+    - 3000:3000
+  depends_on:
+    -jmeter
+
  jmeter:
-   image: jmeterimage
+   image: jmeterserver
    container_name: jmeter
+   ports:
+    -5000:5008
    depends_on:
      - influxdb
      - grafana
