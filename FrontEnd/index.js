@@ -26,7 +26,7 @@ app.post("/", (req, res) => {
     start = engine;
   }
   superagent
-    .post("wmicp.uksouth.cloudapp.azure.com:5008/")
+    .post("wmicp.uksouth.cloudapp.azure.com:5000/")
     .set("threads", threadPool)
     .set("targeturl", targetUrl)
     .set("rampup", rampUpTime)
