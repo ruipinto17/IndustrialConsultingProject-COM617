@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.http.client.utils.URIBuilder;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,13 +24,16 @@ public class ConnectionTest {
     
     private String metric = "jmeter";
     private String host = "webmontioring.uksouth.cloudapp.azure";
-    private Int Port = 443;
-    
-    public ConnectionTest() {
-    }
+    private int Port = 443;
+    private URI uri ;
     
     @BeforeClass
-    public static void setUpClass() {
+    public void setUpClass() {
+        try {
+            uri = new URIBuilder().setScheme("http").setHost(host).setPath("/query?pretty=true").setParameter("db", metric).setParameter("u", "ICPuser").setParameter("p", "ICPpass").build();
+                    } catch (URISyntaxException ex) {
+            Logger.getLogger(ConnectionTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @AfterClass

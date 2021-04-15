@@ -30,6 +30,11 @@
             <version>3.11.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+  <groupId>com.jcabi</groupId>
+  <artifactId>jcabi-http</artifactId>
+  <version>1.17.2</version>
+</dependency>
     </dependencies>
     
     <build>

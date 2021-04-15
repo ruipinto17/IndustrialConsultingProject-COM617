@@ -5,88 +5,128 @@
  */
 package com.ic.httpserver;
 
-import java.io.BufferedReader;
+import com.ic.icproject.PerformanceTest;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URI;
-import java.net.URLEncoder;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
  * @author leite
  */
 public class HTTPServer {
+
+    // Parameters to be passed to PerformanceTest
+    public static String targetUrl = "https://blazedemo.com";
+    public static String threads = "10";
+    public static String rampup = "5";
+    public static String users = null;
+    public static String isRunning = "true";
+    public static PerformanceTest task = null;
+    public static ScheduledExecutorService exec = null;    
+    public static boolean running = true;
+    public static Socket client = null;
+    public static ServerSocket ss = null;
     
-    
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         try {
-            
             System.out.print("Starting HTTP Server\n");
-            
+
             String[] parameters = new String[30];
-            
+
             // Create a ServerSocket to listen on that port.
-            ServerSocket ss = new ServerSocket(5009);
+            ss = new ServerSocket(5008);
+            while(running == true){
+                System.out.print("Loop Starting\n");
+                client = ss.accept();
+                receiveRequest();
+            }            
 
-            // Loop for handling connections
-            System.out.print("Loop Starting\n");
-            for (;;) {
-                
-
-                Socket client = ss.accept();
-                System.out.print("Connections Established\n");
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                PrintWriter out = new PrintWriter(client.getOutputStream());
-
-                out.print("HTTP/1.1 200 \r\n"); 
-                out.print("Content-Type: text/plain\r\n");
-                out.print("Connection: close\r\n");
-                out.print("\r\n"); 
-                
-                System.out.print("Extracting Parameters\n");
-                int i = 0;
-                String line;
-                while ((line = in.readLine()) != null) {
-                    if (line.length() == 0)
-                        break;
-//                    out.print(line + "\r\n");
-                    parameters[i] = line;
-//                    System.out.println(i + " - " + parameters[i]);
-                    i++;
-                }
-
-
-                System.out.print("Closing Services\n");
-                out.close(); 
-                in.close(); 
-                client.close(); 
-                System.out.print("Services Closed\n");
-                
-                System.out.print("Extracted Parameters : \n");
-                //Set parameters to variables.                
-                String targetURL = parameters[17].substring(parameters[17].indexOf(":") + 1);               
-                System.out.println("TARGET URL --- " + targetURL);
-                String users = parameters[18].substring(parameters[18].indexOf(":") + 1);               
-                System.out.println("USERS --- " + users);
-                String threads = parameters[19].substring(parameters[19].indexOf(":") + 1);               
-                System.out.println("THREADS --- " + threads);
-                
-            } // Now loop again, waiting for the next connection
-        } 
-        catch (IOException e) {
+        } catch (IOException e) {
             System.err.println(e);
-            System.err.println("Usage: java HttpMirror 5009");
+            System.err.println("Usage: java HttpMirror 5008");
+        } finally {
+            ss.close(); 
         }
     }
-    
+
+    public static void run() {
+        try {
+            exec = Executors.newScheduledThreadPool(1);
+
+//            String PATHTOTESTPAGE = "https://blazedemo.com/reserve.php";
+            String METHOD = "POST";
+//            String Website = "https://blazedemo.com";
+//            String Thread = "4";
+//            String Rampup = "30";
+
+            task = new PerformanceTest(targetUrl, threads, rampup);
+            exec.scheduleAtFixedRate(task, 0, 1, TimeUnit.MINUTES);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public static void receiveRequest() throws IOException {
+        System.out.print("Connections Established\n");
+
+        DataInputStream in = new DataInputStream(new BufferedInputStream(client.getInputStream()));
+        PrintWriter out = new PrintWriter(client.getOutputStream());
+
+        out.print("HTTP/1.1 200 \r\n");
+        out.print("Content-Type: text/plain\r\n");
+        out.print("Connection: close\r\n");
+        out.print("\r\n");
+
+        System.out.print("Extracting Parameters\n");
+        String line;
+
+        while ((line = in.readLine()) != null) {
+            if (line.toLowerCase().indexOf("targeturl") != -1) {
+                String[] linesplit = line.split(" ");
+                targetUrl = linesplit[1];
+                System.out.println("TargetUrl - " + targetUrl);
+            } else if (line.toLowerCase().indexOf("threads") != -1) {
+                String[] linesplit = line.split(" ");
+                threads = linesplit[1];
+                System.out.println("Threads - " + threads);
+            } else if (line.toLowerCase().indexOf("rampup") != -1) {
+                String[] linesplit = line.split(" ");
+                rampup = linesplit[1];
+                System.out.println("Rampup - " + rampup);
+            } else if (line.toLowerCase().indexOf("users") != -1) {
+                String[] linesplit = line.split(" ");
+                users = linesplit[1];
+                System.out.println("Users - " + users);
+            } else if (line.toLowerCase().indexOf("keeprunning") != -1) {
+                String[] linesplit = line.split(" ");
+                isRunning = linesplit[1];
+                System.out.println("keepRunning - " + users);
+            } else if (line.isEmpty()) {
+                break;
+            }
+        }        
+//        ss.close(); 
+//        if (task == null && ss.isClosed()) {
+//            run();
+//        } else {
+            if (exec != null){
+                exec.shutdown();
+            }
+            if (isRunning.equalsIgnoreCase("true")){
+                run();
+            }
+            
+//        }
+               
+    }
 }
