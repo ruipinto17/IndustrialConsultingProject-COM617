@@ -28,6 +28,7 @@ public class HTTPServer {
     public static String threads = "10";
     public static String rampup = "5";
     public static String users = null;
+    public static String isRunning = "true";
     public static PerformanceTest task = null;
     public static ScheduledExecutorService exec = null;    
     public static boolean running = true;
@@ -106,6 +107,10 @@ public class HTTPServer {
                 String[] linesplit = line.split(" ");
                 users = linesplit[1];
                 System.out.println("Users - " + users);
+            } else if (line.toLowerCase().indexOf("keeprunning") != -1) {
+                String[] linesplit = line.split(" ");
+                isRunning = linesplit[1];
+                System.out.println("keepRunning - " + users);
             } else if (line.isEmpty()) {
                 break;
             }
@@ -117,7 +122,10 @@ public class HTTPServer {
             if (exec != null){
                 exec.shutdown();
             }
-            run();
+            if (isRunning.equalsIgnoreCase("true")){
+                run();
+            }
+            
 //        }
                
     }
