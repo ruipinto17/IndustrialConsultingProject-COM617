@@ -1,0 +1,49 @@
+.top-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.second-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.third-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+input[type=text], [type=number]{
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button{
+    width: 50%;
+    /*background-color: #4CAF50;*/
+    background-color: #7E8287;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#form{
+    margin-left: 32%;
+}
+
+body{
+    background-color: #141619;
+}
+
+label{
+    color: white;
+}

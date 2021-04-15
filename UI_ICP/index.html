@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-US" style="height: 100%;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css"
+</head>
+    <body>
+        <form id="form">
+            <div class="labels">
+                <label for="TargetUrl">Target URL</label>
+            </div>
+                <input type="text" class="form-control" id="TargetUrl" placeholder="www.placeholder.com">
+            <div class="labels">
+                <label for="ThreadPool">Thread pool</label>
+            </div>
+                <input type="number" class="form-control" id="ThreadPool" placeholder="5">
+            <div class="labels">
+                <label for="RampUpTime">RampUp Time</label>
+            </div>
+                <input type="number" class="form-control" id="RampUpTime" placeholder="5">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <div class="top-row">
+            <div id="total-requests">
+                <iframe src="http://webmontoringtool.uksouth.cloudapp.azure.com/d-solo/RJtOoZuMk/icpdashboard?orgId=1&panelId=26" width="450" height="200" frameborder="0"></iframe>
+            </div>
+            <div id="failed-requests">
+                <iframe src="http://webmontoringtool.uksouth.cloudapp.azure.com/d-solo/RJtOoZuMk/icpdashboard?orgId=1&panelId=28" width="450" height="200" frameborder="0"></iframe>
+            </div>
+            <div id="recieved-bytes">
+                <iframe src="http://webmontoringtool.uksouth.cloudapp.azure.com/d-solo/RJtOoZuMk/icpdashboard?orgId=1&panelId=38" width="450" height="200" frameborder="0"></iframe>    
+            </div>
+            <div id="sent-bytes">
+                <iframe src="http://webmontoringtool.uksouth.cloudapp.azure.com/d-solo/RJtOoZuMk/icpdashboard?orgId=1&panelId=37" width="450" height="200" frameborder="0"></iframe>
+            </div>
+            <div id="error-rate">
+                <iframe src="http://webmontoringtool.uksouth.cloudapp.azure.com/d-solo/RJtOoZuMk/icpdashboard?orgId=1&panelId=29" width="450" height="200" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="second-row">
+            <div id="total-throughput">
+                <iframe src="http://webmontoringtool.uksouth.cloudapp.azure.com/d-solo/RJtOoZuMk/icpdashboard?orgId=1&panelId=4" width="450" height="200" frameborder="0"></iframe>
+            </div>
+            <div id="total-errors">
+                <iframe src="http://webmontoringtool.uksouth.cloudapp.azure.com/d-solo/RJtOoZuMk/icpdashboard?orgId=1&panelId=2" width="450" height="200" frameborder="0"></iframe>
+            </div>
+            <div id="active-threads">
+                <iframe src="http://webmontoringtool.uksouth.cloudapp.azure.com/d-solo/RJtOoZuMk/icpdashboard?orgId=1&panelId=31" width="450" height="200" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="third-row">
+            <div id="transactions-response-time">
+                <iframe src="http://webmontoringtool.uksouth.cloudapp.azure.com/d-solo/RJtOoZuMk/icpdashboard?orgId=1&panelId=23" width="450" height="200" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="fourth-row">
+            <div id="network-traffic">
+                <iframe src="http://webmontoringtool.uksouth.cloudapp.azure.com/d-solo/RJtOoZuMk/icpdashboard?orgId=1&panelId=36" width="450" height="200" frameborder="0"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

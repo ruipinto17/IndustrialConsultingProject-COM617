@@ -1,4 +1,5 @@
 version: "3"
+
 services:
   frontend:
     image: frontend
@@ -6,6 +7,15 @@ services:
     ports:
       - 3000:3000
     depends_on: -jmeter
+
+services: 
+ frontend:
+  image: frontend
+  container_name: webUI
+  ports:
+    - 3000:3000
+  depends_on:
+    - jmeter
 
   jmeter:
     image: jmeterserver
