@@ -38,8 +38,6 @@ public class HTTPServer {
         try {
             System.out.print("----- Starting HTTP Server\n");
 
-            String[] parameters = new String[30];
-
             // Create a ServerSocket to listen on that port.
             ss = new ServerSocket(5008);
             int running = 1;
