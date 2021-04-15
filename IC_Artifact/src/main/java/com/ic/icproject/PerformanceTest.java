@@ -32,27 +32,11 @@ public class PerformanceTest implements Runnable {
         this.Thread = Thread;
         this.Rampup = Rampup;
     }
-    
- 
-  
-    
 
-    // Ignore for now, used to run test without JMETER?
-//      @Test
-//  public void testPerformance() throws IOException {
-//    TestPlanStats stats = testPlan(
-//      threadGroup(2, 10,
-//        httpSampler("http://my.service")
-//          .post("{\"name\": \"test\"}", Type.APPLICATION_JSON)
-//      ),
-//      jtlWriter("test" + Instant.now().toString().replace(":", "-") + ".jtl")
-//    ).run();
-//    assertThat(stats.overall().elapsedTimePercentile99()).isLessThan(Duration.ofSeconds(5));
-//  }
-    // Main Test - JMeter will be placed on C: on host and used from there
     @Override
     public void run() {
         try {
+            System.out.print("----- Creating JMeter Engine\n");
             StandardJMeterEngine jmeter = new StandardJMeterEngine();
 
             JMeterUtils.loadJMeterProperties("./src/main/resources/apache-jmeter-5.4.1/bin/jmeter.properties"); // /path/to/your/jmeter/bin/jmeter.properties
@@ -60,6 +44,7 @@ public class PerformanceTest implements Runnable {
             JMeterUtils.initLocale();
             SaveService.loadProperties();
 
+            System.out.print("----- Loading Test Plan\n");
             HashTree testPlanTree = SaveService.loadTree(new File("./src/main/resources/solentTest.jmx")); // /path/to/your/jmeter/extras/Test.jmx
             Summariser summer = null;
             String summariserName = JMeterUtils.getPropDefault("summariser.name", "summary");
@@ -72,6 +57,7 @@ public class PerformanceTest implements Runnable {
             logger.setFilename(logFile);
             testPlanTree.add(testPlanTree.getArray()[0], logger);
 
+            System.out.print("----- Adding Arguments to Test Plan\n");
             Arguments args = new Arguments();
             args.addArgument("Website", this.Website);
             args.addArgument("Threads", this.Thread);
@@ -79,6 +65,7 @@ public class PerformanceTest implements Runnable {
             testPlanTree.add(args);
 
             jmeter.configure(testPlanTree);
+            System.out.print("----- Running Test Plan\n");
             jmeter.run();
 
         } catch (IOException t) {
