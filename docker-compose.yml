@@ -5,9 +5,6 @@ services:
     image: jmeterserver
     container_name: jmeter
     ports: -5000:5008
-    depends_on:
-      - influxdb
-      - grafana
 
   grafana:
     image: grafana/grafana
@@ -50,8 +47,6 @@ services:
     container_name: webUI
     ports:
       - 3000:3000
-    depends_on:
-      - jmeter
 
 networks:
   grafana_network:
