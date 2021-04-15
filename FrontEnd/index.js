@@ -12,26 +12,29 @@ app.get("/", (req, res) => {
   res.render("index", { title: "Home Page" });
 });
 
-let tgurl = "";
 app.post("/", (req, res) => {
   let targetUrl = req.body.TargetUrl;
   let threadPool = req.body.ThreadPool;
   let rampUpTime = req.body.RampUpTime;
+  let engine = req.body.engine;
+  let tinterval = req.body.interval;
 
-  tgurl = targetUrl;
-  function method() {
-    superagent
-      .post("localhost:5008/")
-      .set("threads", threadPool)
-      .set("targeturl", targetUrl)
-      .set("rampup", rampUpTime)
-      .end((err, res) => {
-        // Calling the end function will send the request
-      });
+  let start;
+  if (engine == null) {
+    start = "false";
+  } else {
+    start = engine;
   }
-  if (tgurl != null) {
-    setInterval(method, 5000);
-  }
+  superagent
+    .post("wmicp.uksouth.cloudapp.azure.com:5008/")
+    .set("threads", threadPool)
+    .set("targeturl", targetUrl)
+    .set("rampup", rampUpTime)
+    .set("keeprunning", start)
+    .set("timeinterval", tinterval)
+    .end((err, res) => {
+      // Calling the end function will send the request
+    });
 });
 
 app.listen(3000, () => {
