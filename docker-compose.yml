@@ -1,11 +1,6 @@
 version: "3"
 
 services:
-  jmeter:
-    image: jmeterserver
-    container_name: jmeter
-    ports: -5000:5008
-
   grafana:
     image: grafana/grafana
     container_name: grafana
@@ -41,6 +36,12 @@ services:
       - INFLUXDB_ADMIN_ENABLED=true
       - INFLUXDB_ADMIN_USER=admin
       - INFLUXDB_ADMIN_PASSWORD=admin
+
+  jmeter:
+    image: jmeterserver
+    container_name: jmeter
+    ports:
+      - 5000:5008
 
   frontend:
     image: frontend
