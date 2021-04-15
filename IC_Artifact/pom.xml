@@ -45,7 +45,7 @@
   <artifactId>exec-maven-plugin</artifactId>
   <version>1.4.0</version>
   <configuration>
-    <mainClass>com.ic.icproject.ThreadPool</mainClass>
+    <mainClass>com.ic.httpserver.HTTPServer</mainClass>
   </configuration>
       </plugin>
   </plugins>
