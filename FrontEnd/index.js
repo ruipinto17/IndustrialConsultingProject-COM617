@@ -23,7 +23,7 @@ app.post("/", (req, res) => {
   if (engine == null) {
     start = "false";
   } else {
-    start = engine;
+    start = "true";
   }
   superagent
     .post("wmicp.uksouth.cloudapp.azure.com:5000/")

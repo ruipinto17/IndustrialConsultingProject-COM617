@@ -1,2 +1,3 @@
 com\ic\icproject\PerformanceTest.class
 com\ic\httpserver\HTTPServer.class
+com\ic\icproject\UserSelectedTestPlan.class
