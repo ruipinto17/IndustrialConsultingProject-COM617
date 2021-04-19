@@ -10,6 +10,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -27,7 +28,7 @@ public class HTTPServer {
     public static String targetUrl = "https://blazedemo.com";
     public static String threads = "10";
     public static String rampup = "5";
-    public static String timeInterval = "10";
+    public static String timeInterval = "60";
     public static String isRunning = "true";
     public static PerformanceTest task = null;
     public static ScheduledExecutorService exec = null;
@@ -111,7 +112,7 @@ public class HTTPServer {
             System.err.println("----- Creating PerformanceTask");
             task = new PerformanceTest(targetUrl, threads, rampup);
             System.err.println("----- Run ScheduledExecutor");
-            exec.scheduleAtFixedRate(task, 0, 1, TimeUnit.MINUTES);
+            exec.scheduleAtFixedRate(task, 0,parseInt(timeInterval), TimeUnit.SECONDS);
         } catch (Exception e) {
             System.out.println(e);
         }

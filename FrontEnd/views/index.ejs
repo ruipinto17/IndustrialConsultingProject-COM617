@@ -12,11 +12,12 @@
         <label for="TargetUrl">Target URL</label>
       </div>
       <input
-        type="text"
+        type="url"
         class="form-control"
         name="TargetUrl"
         placeholder="www.placeholder.com"
         value=""
+        required
       />
       <div class="labels">
         <label for="ThreadPool">Thread pool</label>
@@ -27,6 +28,7 @@
         name="ThreadPool"
         placeholder="5"
         value=""
+        required
       />
       <div class="labels">
         <label for="RampUpTime">RampUp Time</label>
@@ -37,20 +39,21 @@
         name="RampUpTime"
         placeholder="5"
         value=""
+        required
       />
       <div class="labels">
-        <label for="interval">Time interval</label>
+        <label for="interval">Time interval(seconds)</label>
       </div>
       <input
         type="number"
         class="form-control"
         name="interval"
-        placeholder="5"
-        value=""
+        value="60"
+        required
       />
       <div class="labels">
-        <label for="engine">Run</label>
-        <input type="checkbox" name="engine" value="true" />
+        <label for="engine">Start - Uncheck and submit to stop</label>
+        <input type="checkbox" name="engine" value="true" checked />
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -189,7 +192,8 @@
       flex-direction: row;
     }
     input[type="text"],
-    [type="number"] {
+    [type="number"],
+    [type="url"] {
       width: 50%;
       padding: 12px 20px;
       margin: 8px 0;
