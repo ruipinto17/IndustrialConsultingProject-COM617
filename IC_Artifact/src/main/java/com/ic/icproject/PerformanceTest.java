@@ -68,21 +68,6 @@ public class PerformanceTest implements Runnable {
             args.addArgument("Ramp-up-Time", this.Rampup);
             testPlanTree.add(args);
 
-            BackendListener backendListener = new BackendListener();
-            backendListener.setName("Backend Listner");
-            Arguments arguments = new Arguments();
-            arguments.addArgument("influxdbMetricsSender", "org.apache.jmeter.visualizers.backend.influxdb.HttpMetricsSender", "=");
-            arguments.addArgument("influxdbUrl", "http://wmicp.uksouth.cloudapp.azure.com:443/write?db=jmeter", "=");
-            arguments.addArgument("application", "application name", "=");
-            arguments.addArgument("measurement", "jmeter", "=");
-            arguments.addArgument("summaryOnly", "true", "=");
-            arguments.addArgument("samplersRegex", ".*", "=");
-            arguments.addArgument("percentiles", "90;95;99", "=");
-            arguments.addArgument("testTitle", "Test name", "=");
-            backendListener.setArguments(arguments);
-            backendListener.setProperty(TestElement.TEST_CLASS, backendListener.getClassname());
-            backendListener.setProperty(TestElement.GUI_CLASS, BackendListenerGui.class.getName());
-
             jmeter.configure(testPlanTree);
             System.out.print("----- Running Test Plan\n");
             jmeter.run();
