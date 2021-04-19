@@ -35,6 +35,8 @@ app.post("/", (req, res) => {
     .end((err, res) => {
       // Calling the end function will send the request
     });
+
+  res.render("index", { title: "Home Page" });
 });
 
 app.listen(3000, () => {
