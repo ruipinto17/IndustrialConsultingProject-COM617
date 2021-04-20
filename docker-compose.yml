@@ -18,6 +18,7 @@ services:
       - GF_INSTALL_PLUGINS=cloudspout-button-panel
     depends_on:
       - influxdb
+    restart: always
 
   influxdb:
     image: influxdb:1.8.4
@@ -36,18 +37,27 @@ services:
       - INFLUXDB_ADMIN_ENABLED=true
       - INFLUXDB_ADMIN_USER=admin
       - INFLUXDB_ADMIN_PASSWORD=admin
+    depends_on: 
+      - jmeter
+    restart: always
 
   jmeter:
     image: jmeterserver
     container_name: jmeter
     ports:
       - 5000:5008
+    restart: always
+    
 
   frontend:
     image: frontend
     container_name: webUI
     ports:
       - 80:3000
+    restart: on-failure
+    depends_on:
+      - jmeter 
+
 
 networks:
   grafana_network:
