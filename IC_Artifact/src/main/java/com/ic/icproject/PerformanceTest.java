@@ -7,6 +7,7 @@ package com.ic.icproject;
  */
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.Instant;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.engine.StandardJMeterEngine;
@@ -49,6 +50,7 @@ public class PerformanceTest implements Runnable {
             SaveService.loadProperties();
 
             System.out.print("----- Loading Test Plan\n");
+  
             HashTree testPlanTree = SaveService.loadTree(new File("./src/main/resources/solentTest.jmx")); // /path/to/your/jmeter/extras/Test.jmx
             Summariser summer = null;
             String summariserName = JMeterUtils.getPropDefault("summariser.name", "summary");

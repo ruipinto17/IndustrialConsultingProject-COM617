@@ -7,56 +7,110 @@
   </head>
 
   <body>
-    <form id="form" method="POST">
-      <div class="labels">
-        <label for="TargetUrl">Target URL</label>
+    <div class="Parameter-row">
+      <div class="CurrentTest">
+        <h2>Current Variables being test</h2>
+        <div id="currnetValues">
+          <p>Target Url: <%= targetUrl %></p>
+        </div>
+        <div id="currnetValues">
+          <p>ThreadPool: <%= threadPool %></p>
+        </div>
+        <div id="currnetValues">
+          <p>Ramp up: <%= rampUpTime %></p>
+        </div>
+        <div id="currnetValues">
+          <p>Time interval(seconds):<%= tinterval %></p>
+        </div>
       </div>
-      <input
-        type="url"
-        class="form-control"
-        name="TargetUrl"
-        placeholder="www.placeholder.com"
-        value=""
-        required
-      />
-      <div class="labels">
-        <label for="ThreadPool">Thread pool</label>
+      <div class="form">
+        <form id="form" method="POST">
+          <div class="labels">
+            <label for="TargetUrl">Target URL</label>
+          </div>
+          <input
+            type="url"
+            class="form-control"
+            name="TargetUrl"
+            placeholder="www.placeholder.com"
+            value=""
+            required
+          />
+          <div class="labels">
+            <label for="ThreadPool">Thread pool</label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            name="ThreadPool"
+            placeholder="5"
+            value=""
+            required
+          />
+          <div class="labels">
+            <label for="RampUpTime">RampUp Time</label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            name="RampUpTime"
+            placeholder="5"
+            value=""
+            required
+          />
+          <div class="labels">
+            <label for="interval">Time interval(seconds)</label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            name="interval"
+            value="60"
+            required
+          />
+          <div class="labels">
+            <label for="engine">Start - Uncheck and submit to stop</label>
+            <input type="checkbox" name="engine" value="true" checked />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
-      <input
-        type="number"
-        class="form-control"
-        name="ThreadPool"
-        placeholder="5"
-        value=""
-        required
-      />
-      <div class="labels">
-        <label for="RampUpTime">RampUp Time</label>
+      <div class="inputTestPlan">
+        <h2>Copy in your own test Plan</h2>
+        <textarea
+          id="testplanInput"
+          name="testplancode"
+          form="testplanform"
+          placeholder="Place your Test Plan code in here"
+        ></textarea>
+        <form id="testplanform" method="POST">
+          <div class="labels">
+            <label for="engine">Start - Uncheck and submit to stop</label>
+            <input type="checkbox" name="engine" value="true" checked />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
-      <input
-        type="number"
-        class="form-control"
-        name="RampUpTime"
-        placeholder="5"
-        value=""
-        required
-      />
-      <div class="labels">
-        <label for="interval">Time interval(seconds)</label>
+    </div>
+
+    <div class="fourth-row">
+      <div id="Transactions Response Time ">
+        <iframe
+          src="http://wmicp.uksouth.cloudapp.azure.com:3000/d-solo/y2o0OKXMz/apache-jmeter-dashboard-using-core-influxdbbackendlistenerclient?orgId=1&refresh=5s&from=1618894473966&to=1618916073966&theme=dark&panelId=23"
+          width="950"
+          height="200"
+          frameborder="0"
+        ></iframe>
       </div>
-      <input
-        type="number"
-        class="form-control"
-        name="interval"
-        value="60"
-        required
-      />
-      <div class="labels">
-        <label for="engine">Start - Uncheck and submit to stop</label>
-        <input type="checkbox" name="engine" value="true" checked />
+      <div id="Network-traffic">
+        <iframe
+          src="http://wmicp.uksouth.cloudapp.azure.com:3000/d-solo/y2o0OKXMz/apache-jmeter-dashboard-using-core-influxdbbackendlistenerclient?orgId=1&panelId=36"
+          width="950"
+          height="200"
+          frameborder="0"
+        ></iframe>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
 
     <div class="top-row">
       <div id="total-requests">
@@ -152,34 +206,55 @@
         ></iframe>
       </div>
     </div>
-    <div class="fourth-row">
-      <div id="Transactions Response Time ">
-        <iframe
-          src="http://wmicp.uksouth.cloudapp.azure.com:3000/d-solo/y2o0OKXMz/apache-jmeter-dashboard-using-core-influxdbbackendlistenerclient?orgId=1&panelId=23"
-          width="950"
-          height="200"
-          frameborder="0"
-        ></iframe>
-      </div>
-      <div id="Network-traffic">
-        <iframe
-          src="http://wmicp.uksouth.cloudapp.azure.com:3000/d-solo/y2o0OKXMz/apache-jmeter-dashboard-using-core-influxdbbackendlistenerclient?orgId=1&panelId=36"
-          width="950"
-          height="200"
-          frameborder="0"
-        ></iframe>
-      </div>
-    </div>
   </body>
+
   <style>
+    .Parameter-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .form {
+      width: 500px;
+    }
+
+    .inputTestPlan {
+      width: 400px;
+      color: azure;
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
+    }
+    #testplanInput {
+      height: 200px;
+      width: 500px;
+    }
+
+    .CurrentTest {
+      width: 400px;
+      color: azure;
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
+    }
+    #currnetValues {
+      display: flex;
+      flex-direction: row;
+      font-size: 22px;
+    }
+
     .top-row {
       display: flex;
       flex-direction: row;
+      width: 100%;
     }
 
     .second-row {
       display: flex;
       flex-direction: row;
+      width: 100%;
     }
 
     .third-row {
@@ -190,11 +265,12 @@
     .fourth-row {
       display: flex;
       flex-direction: row;
+      width: 100%;
     }
     input[type="text"],
     [type="number"],
     [type="url"] {
-      width: 50%;
+      width: 90%;
       padding: 12px 20px;
       margin: 8px 0;
       display: inline-block;
@@ -215,13 +291,9 @@
       cursor: pointer;
     }
 
-    #form {
-      margin-left: 32%;
-    }
-
     body {
       background-color: #141619;
-      width: 100%;
+      width: 1500px;
     }
 
     label {

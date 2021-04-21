@@ -6,6 +6,7 @@
 package com.ic.httpserver;
 
 import com.ic.icproject.PerformanceTest;
+import com.ic.icproject.UserSelectedTestPlan;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
 
 /**
  *
@@ -91,7 +93,8 @@ public class HTTPServer {
                 String[] linesplit = line.split(" ");
                 isRunning = linesplit[1];
                 System.out.println("----- keepRunning - " + isRunning);
-            } else if (line.isEmpty()) {
+            } 
+            else if (line.isEmpty()) {
                 break;
             }
         }
@@ -110,9 +113,10 @@ public class HTTPServer {
             System.err.println("----- Creating ScheduledExecutor");
             exec = Executors.newScheduledThreadPool(1);
             System.err.println("----- Creating PerformanceTask");
-            task = new PerformanceTest(targetUrl, threads, rampup);
+                                 task = new PerformanceTest(targetUrl, threads, rampup);
             System.err.println("----- Run ScheduledExecutor");
             exec.scheduleAtFixedRate(task, 0,parseInt(timeInterval), TimeUnit.SECONDS);
+            
         } catch (Exception e) {
             System.out.println(e);
         }

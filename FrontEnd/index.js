@@ -1,6 +1,12 @@
 import Express from "express";
 import bodyParser from "body-parser";
 import superagent from "superagent";
+import fs from "fs";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = Express();
 app.set("view engine", "ejs");
@@ -8,8 +14,31 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(Express.static("public"));
 
+app.get("/userTestPlan.jmx", (req, res) => {
+  res.sendFile(__dirname + "/userTestPlan.jmx");
+});
 app.get("/", (req, res) => {
-  res.render("index", { title: "Home Page" });
+  let targetUrl = "Not running";
+  let threadPool = "Not running";
+  let rampUpTime = "Not running";
+  let engine = "Not running";
+  let tinterval = "Not running";
+
+  let start;
+  if (engine == null) {
+    start = "false";
+  } else {
+    start = "true";
+  }
+
+  res.render("index", {
+    title: "Home Page",
+    targetUrl: targetUrl,
+    threadPool: threadPool,
+    rampUpTime: rampUpTime,
+    start: start,
+    tinterval: tinterval,
+  });
 });
 
 app.post("/", (req, res) => {
@@ -26,7 +55,7 @@ app.post("/", (req, res) => {
     start = "true";
   }
   superagent
-    .post("wmicp.uksouth.cloudapp.azure.com:5000/")
+    .post("http://webmontiortool.uksouth.cloudapp.azure.com:5000/")
     .set("threads", threadPool)
     .set("targeturl", targetUrl)
     .set("rampup", rampUpTime)
@@ -36,7 +65,21 @@ app.post("/", (req, res) => {
       // Calling the end function will send the request
     });
 
-  res.render("index", { title: "Home Page" });
+  if (start == "false") {
+    targetUrl = "Not running";
+    threadPool = "Not running";
+    rampUpTime = "Not running";
+    engine = "Not running";
+    tinterval = "Not running";
+  }
+  res.render("index", {
+    title: "Home Page",
+    targetUrl: targetUrl,
+    threadPool: threadPool,
+    rampUpTime: rampUpTime,
+    start: start,
+    tinterval: tinterval,
+  });
 });
 
 app.listen(3000, () => {
