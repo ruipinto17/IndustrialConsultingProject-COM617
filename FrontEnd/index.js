@@ -4,6 +4,9 @@ import superagent from "superagent";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import NodeCache from "node-cache";
+
+const myCache = new NodeCache();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,27 +21,29 @@ app.get("/userTestPlan.jmx", (req, res) => {
   res.sendFile(__dirname + "/userTestPlan.jmx");
 });
 app.get("/", (req, res) => {
-  let targetUrl = "Not running";
-  let threadPool = "Not running";
-  let rampUpTime = "Not running";
-  let engine = "Not running";
-  let tinterval = "Not running";
+  if (myCache.get("targetUrl") == undefined) {
+    let targetUrl = "Not running";
+    let threadPool = "Not running";
+    let rampUpTime = "Not running";
+    let tinterval = "Not running";
 
-  let start;
-  if (engine == null) {
-    start = "false";
+    res.render("index", {
+      title: "Home Page",
+      targetUrl: targetUrl,
+      threadPool: threadPool,
+      rampUpTime: rampUpTime,
+      tinterval: tinterval,
+    });
   } else {
-    start = "true";
+    res.render("index", {
+      title: "Home Page",
+      targetUrl: myCache.get("targetUrl"),
+      threadPool: myCache.get("threadPool"),
+      rampUpTime: myCache.get("rampUpTime"),
+      start: myCache.get("start"),
+      tinterval: myCache.get("tinterval"),
+    });
   }
-
-  res.render("index", {
-    title: "Home Page",
-    targetUrl: targetUrl,
-    threadPool: threadPool,
-    rampUpTime: rampUpTime,
-    start: start,
-    tinterval: tinterval,
-  });
 });
 
 app.post("/", (req, res) => {
@@ -66,19 +71,29 @@ app.post("/", (req, res) => {
     });
 
   if (start == "false") {
-    targetUrl = "Not running";
-    threadPool = "Not running";
-    rampUpTime = "Not running";
-    engine = "Not running";
-    tinterval = "Not running";
+    myCache.mset([
+      { key: "targetUrl", val: "Not running" },
+      { key: "threadPool", val: "Not running" },
+      { key: "rampUpTime", val: "Not running" },
+      { key: "engine", val: "Not running" },
+      { key: "tinterval", val: "Not running" },
+    ]);
+  } else {
+    myCache.mset([
+      { key: "targetUrl", val: targetUrl },
+      { key: "threadPool", val: threadPool },
+      { key: "rampUpTime", val: rampUpTime },
+      { key: "engine", val: engine },
+      { key: "tinterval", val: tinterval },
+    ]);
   }
   res.render("index", {
     title: "Home Page",
-    targetUrl: targetUrl,
-    threadPool: threadPool,
-    rampUpTime: rampUpTime,
-    start: start,
-    tinterval: tinterval,
+    targetUrl: myCache.get("targetUrl"),
+    threadPool: myCache.get("threadPool"),
+    rampUpTime: myCache.get("rampUpTime"),
+    start: myCache.get("start"),
+    tinterval: myCache.get("tinterval"),
   });
 });
 
