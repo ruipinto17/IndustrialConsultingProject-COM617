@@ -32,7 +32,7 @@
             type="url"
             class="form-control"
             name="TargetUrl"
-            placeholder="www.placeholder.com"
+            placeholder="www.yourwebsitehere.com"
             value=""
             required
           />
@@ -43,8 +43,10 @@
             type="number"
             class="form-control"
             name="ThreadPool"
-            placeholder="5"
+            placeholder="(between 1 and 10)"
             value=""
+            min="1"
+            max="10"
             required
           />
           <div class="labels">
@@ -54,18 +56,23 @@
             type="number"
             class="form-control"
             name="RampUpTime"
-            placeholder="5"
+            placeholder="(between 1 and 10)"
             value=""
+            min="1"
+            max="10"
             required
           />
           <div class="labels">
-            <label for="interval">Time interval(seconds)</label>
+            <label for="interval"
+              >Time interval(seconds - 5 secends or Over)</label
+            >
           </div>
           <input
             type="number"
             class="form-control"
             name="interval"
             value="60"
+            min="5"
             required
           />
           <div class="labels">
