@@ -1,0 +1,1726 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Industrial Consulting - logs</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chatlog__reference-link:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">Industrial Consulting</div>
+        <div class="preamble__entry">Text Channels / logs</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">02-Feb-21 11:56 AM</span>
+
+            <div class="chatlog__message " data-message-id="806131041706311720" id="message-806131041706311720">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+
+<strong>Initial things that we might have to do:</strong>
+
+1) <strong>Set up a github repo</strong>
+
+<span class="pre pre--inline">- Automated kanban project</span>
+<span class="pre pre--inline">- Github wiki page, so we have one place for all the necessary documentation</span>
+
+2) <strong>Create a project plan</strong>
+
+<span class="pre pre--inline">- Excel file</span>
+<span class="pre pre--inline">- Microsoft Project</span>
+
+3) <strong>Practices and conventions document</strong>
+
+<span class="pre pre--inline">- CamelCase convention and naming for Java development</span>
+
+4) <strong>Define roles</strong>
+
+We have some ideas on what everyone wants/is fit to do,
+however, I think we can decide this a bit more clearly when we know
+what we are supposed to do.
+
+5) <strong>Go through the steps of development for the project</strong>
+
+<span class="pre pre--inline">- Requirements</span>
+<span class="pre pre--inline">- Design</span>
+<span class="pre pre--inline">- Implementation / testing</span>
+<span class="pre pre--inline">- Documentation / maintenance</span></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">09-Feb-21 12:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="808677741493747753" id="message-808677741493747753">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+
+<strong>Initial research topics:</strong>
+
+<span class="pre pre--inline">- JMeter</span>
+<span class="pre pre--inline">- Similar tools/applications: elastic stack, blazemeter</span> (there&#39;s a plugin for chrome and firefox)
+<span class="pre pre--inline">- Web monitoring metrics</span> (appropriate metrics related with performance changes)
+<span class="pre pre--inline">- influxDB</span> (data storage)
+<span class="pre pre--inline">- Grafana</span> (visual representation of results in graphics)
+<span class="pre pre--inline">- DevOps</span> (container deployment, jmeter script automation)
+
+<strong>First meeting notes / inital thoughts 09/02/21:</strong>
+
+<span class="pre pre--inline">- Create a DevOps solution for continuously displaying UX and availability monitoring test results on a web page.</span>
+<span class="pre pre--inline">- Thursday (11/02/21) meeting at 2pm.</span> (Additional meetings throughout the week may be necessary)
+<span class="pre pre--inline">- Main goals for this meeting:</span> gather requirements + allocate roles more precisely</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Feb-21 12:36 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">11-Feb-21 03:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="809447355065303080" id="message-809447355065303080">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span> 
+
+Definition of basic use cases
+Main System Proposition
+Documentation Needed
+
+<strong>Task Allocation:</strong>
+<span class="pre pre--inline">Joao and Aeryk</span> - JMeter and Performance Metrics
+<span class="pre pre--inline">Afonso and Rui</span> - InfluxDB/Grafana and how data will be moved between technologies
+<span class="pre pre--inline">Tebogo</span> - Docker, project deployment
+<span class="pre pre--inline">All</span> - documentation/presentation
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<span class="pre pre--inline">Requirements file link</span> - <a href="https://docs.google.com/document/d/1jwLMgzqOEsSv_mV19dAASkGfjulxsxQs-cWI9BdPXU8/edit">https://docs.google.com/document/d/1jwLMgzqOEsSv_mV19dAASkGfjulxsxQs-cWI9BdPXU8/edit</a></span>
+
+                                <span class="chatlog__edited-timestamp" title="11-Feb-21 03:47 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://docs.google.com/document/d/1jwLMgzqOEsSv_mV19dAASkGfjulxsxQs-cWI9BdPXU8/edit">
+                                                    <div class="markdown preserve-whitespace">Requirements for Industrial Consulting project:</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">Requirements for Industrial Consulting project:  Create a test plan Canary testing Green/blue/red testing Integration testing Make a request every x time (every 5 mins not sure) Store performance metrics in influxDB (metrics tbd) Status (main metric) Latency Sample size(Bytes) Ms response(Maybe) ...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://lh4.googleusercontent.com/k__51yOtZCHduFsOsBVQlze0S1IReNorV_YodM3e_erkCnVXZRHOsBHQw6RT7pve3406Js1mxA=w1200-h630-p">
+                                            <img class="chatlog__embed-thumbnail" src="https://lh4.googleusercontent.com/k__51yOtZCHduFsOsBVQlze0S1IReNorV_YodM3e_erkCnVXZRHOsBHQw6RT7pve3406Js1mxA=w1200-h630-p" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">16-Feb-21 05:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="811288000193363998" id="message-811288000193363998">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span> 
+
+Next steps for the project:
+
+<span class="pre pre--inline">1) Edit a test plan in Java</span>
+
+<strong>Task Allocation:</strong>
+<span class="pre pre--inline">Joao and Aeryk</span> - JMeter and Performance Metrics
+<span class="pre pre--inline">Afonso and Rui</span> - InfluxDB/Grafana and how data will be moved between technologies
+<span class="pre pre--inline">Tebogo</span> - Docker, project deployment
+<span class="pre pre--inline">All</span> - documentation/presentation
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<span class="pre pre--inline">Requirements file link</span> - <a href="https://docs.google.com/document/d/1jwLMgzqOEsSv_mV19dAASkGfjulxsxQs-cWI9BdPXU8/edit">https://docs.google.com/document/d/1jwLMgzqOEsSv_mV19dAASkGfjulxsxQs-cWI9BdPXU8/edit</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://docs.google.com/document/d/1jwLMgzqOEsSv_mV19dAASkGfjulxsxQs-cWI9BdPXU8/edit">
+                                                    <div class="markdown preserve-whitespace">Requirements for Industrial Consulting project:</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">Requirements for Industrial Consulting project:   Functional Non-functional Create a test plan Canary testing Green/blue/red testing Integration testing Unit test Make a request every x time (every 5 mins not sure)  Store performance metrics in influxDB (metrics tbd) Status (main metr...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://lh4.googleusercontent.com/k__51yOtZCHduFsOsBVQlze0S1IReNorV_YodM3e_erkCnVXZRHOsBHQw6RT7pve3406Js1mxA=w1200-h630-p">
+                                            <img class="chatlog__embed-thumbnail" src="https://lh4.googleusercontent.com/k__51yOtZCHduFsOsBVQlze0S1IReNorV_YodM3e_erkCnVXZRHOsBHQw6RT7pve3406Js1mxA=w1200-h630-p" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">16-Feb-21 06:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="811296378345095178" id="message-811296378345095178">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+
+Goals for thursday&#39;s meeting (18/2/21):
+
+<span class="pre pre--inline">1) Getting Craig&#39;s example running on Docker</span>
+<span class="pre pre--inline">2) Create a more complete test plan</span>
+<span class="pre pre--inline">3) Update use cases and diagrams</span>
+ 
+Possible next steps/ideas for the project:
+
+<span class="pre pre--inline">1) How to run JMeter/InfluxDB/Grafana in Java</span>
+<span class="pre pre--inline">2) How to deploy JMeter/InfluxDB/Grafana container(s)</span>
+<span class="pre pre--inline">3) How to edit JMeter test in Java</span>
+<span class="pre pre--inline">4) Create a website for monitoring</span>
+<span class="pre pre--inline">6) Automatically execute test plan every 5 minutes</span>
+<span class="pre pre--inline">7) Embed grafana visualizations in our website</span>
+<span class="pre pre--inline">8) Dynamically clear dashboard depending on the targeted website</span>
+<span class="pre pre--inline">9) Create test plan with JMeter API or Edit an .xml file</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">18-Feb-21 06:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="812021644225675264" id="message-812021644225675264">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for tuesday&#39;s meeting (23/2/21):</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span>
+<span class="pre pre--inline">1) Getting Craig&#39;s example running on Docker</span>
+
+<span class="mention" title="Leites#4709">@Leites</span> <span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span>
+<span class="pre pre--inline">2) Create a more complete test plan</span>
+<span class="pre pre--inline">3) Update architecture diagram</span>
+
+<span class="mention" title="DKhyng#0650">@Afonso</span> 
+<span class="pre pre--inline">4) Create robustness diagrams</span>
+<span class="pre pre--inline">5) Website development</span>
+
+<span class="mention" title="Rui#6448">@Rui</span>
+<span class="pre pre--inline">6) Automated kanban board, with some documentation explaining how it works</span>
+<span class="pre pre--inline">7) Project plan</span>
+<span class="pre pre--inline">8) Wiki</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<strong>Idea</strong>
+Create and store base project on github</span>
+
+                                <span class="chatlog__edited-timestamp" title="18-Feb-21 06:07 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">23-Feb-21 12:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="813751531962630174" id="message-813751531962630174">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for thursday&#39;s meeting (25/2/21) / next tuesday (2/3/21)</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span>
+<span class="pre pre--inline">- Getting Docker hosted (host tbd)</span>
+
+<span class="mention" title="Leites#4709">@Leites</span> 
+<span class="pre pre--inline">- How to implement assertions for problem detecting in a jmeter test</span>
+<span class="pre pre--inline">- Update architecture diagram</span>
+<span class="pre pre--inline">- Create and store base project on github</span>
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span>
+<span class="pre pre--inline">- Adding a readme file with a link to the images</span>
+<span class="pre pre--inline">- Convert the word file to a md file</span>
+
+<span class="mention" title="DKhyng#0650">@Afonso</span> 
+<span class="pre pre--inline">- Website development (.jsp / react)</span>
+<span class="pre pre--inline">- Host webpages on github</span>
+
+<span class="mention" title="Rui#6448">@Rui</span>
+<span class="pre pre--inline">- Integrate pull requests / Complete the documentation explaining how the project board works</span>
+<span class="pre pre--inline">- Research problems to implement in the pages</span>
+<span class="pre pre--inline">- Project Plan</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<strong>Note</strong>
+Everyone feel free to update the wiki with documentation you consider necessary
+Consider having different types of users
+Consider possible further changes to use cases
+Documentation (diagram) regarding the implementation of the faulty pages</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">26-Feb-21 05:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="814904730961575996" id="message-814904730961575996">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span> <strong>Meeting 10am (1/3)</strong>
+<span class="mention">@everyone</span> <strong>Topics for presentation (2/3)</strong> 
+
+1) Overall project description + System Diagram 
+2) Complete the project plan and post it on the wiki
+3) Requirements represented by the Use cases supported by robustness diagrams
+4) Role and task allocation + Attendance Sheet
+6) Show documentation on wiki + walkthrough of Sprint Board
+7) Demo
+
+Note: Download the messages of all the text channels and keep them in a log book
+
+<strong>Tasks that need to be completed</strong>
+
+ <span class="mention" title="Rui#6448">@Rui</span>
+<span class="pre pre--inline">Project Plan</span>
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span> 
+<span class="pre pre--inline">Attendance sheet </span>
+
+<span class="mention" title="Tee#3738">@Tee</span> 
+<span class="pre pre--inline">Write Wiki page about docker</span></span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Feb-21 05:02 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">02-Mar-21 11:56 AM</span>
+
+            <div class="chatlog__message " data-message-id="816277829570002974" id="message-816277829570002974">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for thursday&#39;s meeting (4/3/21)</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span>
+<span class="pre pre--inline">- Getting Docker containers hosted (heroku)</span>
+
+<span class="mention" title="Leites#4709">@Leites</span> 
+<span class="pre pre--inline">- Update architecture diagram</span>
+<span class="pre pre--inline">- Create template web application</span>
+<span class="pre pre--inline">- JMeter API usage</span>
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span>
+<span class="pre pre--inline">- Embed the diagrams on the github page</span>
+<span class="pre pre--inline">- Overall tidying of the repo</span>
+<span class="pre pre--inline">- Write about canary/red/blue testing and post the JMeter.pdf file to the wiki</span>
+
+<span class="mention" title="DKhyng#0650">@Afonso</span> 
+<span class="pre pre--inline">- Website development (.jsp / react)</span>
+<span class="pre pre--inline">- Host webpages on github (webpage host tbd)</span>
+<span class="pre pre--inline">- Research problems to implement in the pages / Faulty website creation</span>
+
+<span class="mention" title="Rui#6448">@Rui</span>
+<span class="pre pre--inline">- Integrate pull requests / Complete the documentation explaining how the project board works</span>
+<span class="pre pre--inline">- Automate pull requests merge</span>
+<span class="pre pre--inline">- Research problems to implement in the pages</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<strong>Think about the desired project goal for the end of the second sprint</strong></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">09-Mar-21 12:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="818826494721654785" id="message-818826494721654785">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for thursday&#39;s meeting (11/3/21)</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span>
+<span class="pre pre--inline">- JMeter running on Docker</span>
+
+<span class="mention" title="Leites#4709">@Leites</span> 
+<span class="pre pre--inline">- Implement the thread pool</span>
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span>
+<span class="pre pre--inline">- Documentation about influxDB and Grafana how they work individually and collaboratively</span>
+<span class="pre pre--inline">- Research problem metrics to implement in the pages</span>
+
+<span class="mention" title="DKhyng#0650">@Afonso</span> 
+<span class="pre pre--inline">- JavaScript implementations of a panel in the Grafana dashboard</span>
+
+<span class="mention" title="Rui#6448">@Rui</span>
+<span class="pre pre--inline">- Create automation scripts for some tasks (pull request merge, azure, maven builds)</span>
+<span class="pre pre--inline">- Research problem metrics to implement in the pages</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<strong>Think about the desired project goal for the end of the second sprint</strong>`</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">16-Mar-21 12:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="821364160129925132" id="message-821364160129925132">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for thursday&#39;s meeting (18/3/21)</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span>
+<span class="pre pre--inline">- Speed up result display times</span>
+
+<span class="mention" title="Leites#4709">@Leites</span> 
+<span class="pre pre--inline">- Build the presentation</span>
+<span class="pre pre--inline">- Add logs</span>
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span>
+<span class="pre pre--inline">- Test Plan</span>
+
+<span class="mention" title="DKhyng#0650">@Afonso</span> 
+<span class="pre pre--inline">- Implementing button on the dashboard</span>
+
+<span class="mention" title="Rui#6448">@Rui</span>
+<span class="pre pre--inline">- Implement yaml script on the repo</span>
+<span class="pre pre--inline">- Build the presentation</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<strong>Read about: Grafana Inverse Proxy</strong>`</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">18-Mar-21 04:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="822143472466526278" id="message-822143472466526278">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for tuesday&#39;s meeting (23/3/21)</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span>
+<span class="pre pre--inline">- Create a base JMeter test</span>
+<span class="pre pre--inline">- Create demo video</span>
+
+<span class="mention" title="Leites#4709">@Leites</span> 
+<span class="pre pre--inline">- Build the presentation</span>
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span>
+<span class="pre pre--inline">- Test Plan</span>
+<span class="pre pre--inline">- Carry on with the JMX property edit test</span>
+
+<span class="mention" title="DKhyng#0650">@Afonso</span> 
+<span class="pre pre--inline">- Implementing button on the dashboard</span>
+
+<span class="mention" title="Rui#6448">@Rui</span>
+<span class="pre pre--inline">- Implement yaml script on the repo</span>
+<span class="pre pre--inline">- Build the presentation</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<strong>Read about: Grafana Inverse Proxy</strong>
+<strong>Read about: ReST API Calls</strong></span>
+
+                                <span class="chatlog__edited-timestamp" title="23-Mar-21 11:42 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">23-Mar-21 12:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="823898411430445096" id="message-823898411430445096">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for thursday&#39;s meeting (25/3/21)</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span>
+<span class="pre pre--inline">- Research about editing the URL</span>
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span>
+<span class="pre pre--inline">- Research the blazemeter extension and how it can be used to update fields</span>
+• Run a couple tests
+• Test if we can edit fields of the test with the extension
+• If not, what can we do with it?
+
+<span class="mention" title="DKhyng#0650">@Afonso</span> 
+<span class="pre pre--inline">- Form that holds user input</span>
+
+<span class="mention" title="Rui#6448">@Rui</span> &amp; <span class="mention" title="Leites#4709">@Leites</span> 
+<span class="pre pre--inline">- Implement yaml script on the repo</span>
+<span class="pre pre--inline">- Research about ReST API</span>
+• How to tie grafana dashboard with the test plan
+• GET/POST requests
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<strong>Questions for Craig: How to set up the ReST API</strong>
+
+<strong>Read about: Grafana Inverse Proxy</strong></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">25-Mar-21 05:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="824695186889244692" id="message-824695186889244692">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for tuesday&#39;s meeting (30/3/21)</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span>
+<span class="pre pre--inline">- Research about editing the URL</span>
+<span class="pre pre--inline">- Unit tests draft</span>
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span>
+<span class="pre pre--inline">- Get the template report file done</span>
+
+<span class="mention" title="DKhyng#0650">@Afonso</span> &amp; <span class="mention" title="Leites#4709">@Leites</span>
+<span class="pre pre--inline">- Form that holds user input</span>
+
+<span class="mention" title="Rui#6448">@Rui</span>  
+<span class="pre pre--inline">- Further implement yaml script on the repo</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">30-Mar-21 12:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="826419172715397180" id="message-826419172715397180">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for tuesday&#39;s meeting (6/4/21)</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span> <span class="mention" title="Rui#6448">@Rui</span>  
+<span class="pre pre--inline">- Change user defined values</span>
+<span class="pre pre--inline">- Unit tests</span>
+<span class="pre pre--inline">- Further implement yaml script</span>
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span>
+<span class="pre pre--inline">- Report writing</span>
+
+<span class="mention" title="DKhyng#0650">@Afonso</span> &amp; <span class="mention" title="Leites#4709">@Leites</span>
+<span class="pre pre--inline">- Form that holds user input</span>
+<span class="pre pre--inline">- Grafana interacting with the http server</span>
+<span class="pre pre--inline">- Research about editing the URL</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 12-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<strong>Deliverables</strong>
+
+23/4) PID document (60%)
+
+29/4) Presentation - 6:40 mins approx
+29/4) Demo - 6 mins approx</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">01-Apr-21 05:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="827214136143511592" id="message-827214136143511592">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for tuesday&#39;s meeting (6/4/21)</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span> &amp; <span class="mention" title="Rui#6448">@Rui</span>  
+<span class="pre pre--inline">- Change user defined values</span>
+<span class="pre pre--inline">- Unit tests</span>
+<span class="pre pre--inline">- Unit test job / editions yaml script</span>
+<span class="pre pre--inline">- Actions wiki page</span>
+<span class="pre pre--inline">- Start the ReST interface from the thread pool class</span>
+
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span> &amp; <span class="mention" title="DKhyng#0650">@Afonso</span>
+<span class="pre pre--inline">- Report writing</span>
+
+<span class="mention" title="DKhyng#0650">@Afonso</span> &amp; <span class="mention" title="Leites#4709">@Leites</span>
+<span class="pre pre--inline">- Form that holds user input</span>
+<span class="pre pre--inline">- Grafana interacting with the http server</span>
+<span class="pre pre--inline">- Research about editing the URL</span>
+<span class="pre pre--inline">- WebApp project</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 11-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<strong>Deliverables</strong>
+
+23/4) PID document (60%)
+
+29/4) Presentation - 6:40 mins approx
+29/4) Demo - 6 mins approx</span>
+
+                                <span class="chatlog__edited-timestamp" title="01-Apr-21 05:14 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 04:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="829741722460225596" id="message-829741722460225596">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Report Structure 2k total
+
+Note: Have documentation screenshots  and any extra information in the appendices
+
+(<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span> - 200)
+PROJECT SUMMARY &amp; INTRODUCTION
+PROJECT OBJECTIVES
+--------------------------------
+(<span class="mention" title="Tee#3738">@Tee</span> - 200)
+REQUIREMENTS
+SCOPE AND EXCLUSIONS
+--------------------------------
+(<span class="mention" title="Leites#4709">@Leites</span> - 400)
+MONITORING AND EVALUATION
+--------------------------------
+(<span class="mention" title="DKhyng#0650">@Afonso</span> - 500)
+IMPLEMENTATION
+RESULTS
+--------------------------------
+(<span class="mention" title="Rui#6448">@Rui</span> - 500)
+PROJECT ORGANISATION STRUCTURE
+PROJECT MILESTONES &amp; MANAGEMENT
+--------------------------------
+(<span class="mention" title="DKhyng#0650">@Afonso</span> - 200)
+CONCLUSIONS AND RECOMMENDATION</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="829743251388235806" id="message-829743251388235806">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for tuesday&#39;s meeting (13/4/21)</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span>
+<span class="pre pre--inline">- Editing a jmx file with user&#39;s input</span>
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span>
+<span class="pre pre--inline">- Report writing</span>
+
+<span class="mention" title="Leites#4709">@Leites</span> &amp; <span class="mention" title="Rui#6448">@Rui</span>6648
+<span class="pre pre--inline">- Merging rest interface with performance test</span>
+
+<span class="mention" title="DKhyng#0650">@Afonso</span>
+<span class="pre pre--inline">- Form that holds user input, button to pick a jmx file</span>
+<span class="pre pre--inline">- Embed the grafana panels</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 11-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<strong>Deliverables</strong>
+
+23/4) PID document (60%)
+
+29/4) Presentation - 6:40 mins approx
+29/4) Demo - 6 mins approx</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rui#6448" data-user-id="297043709697064960" style="">Rui</span>
+
+
+        <span class="chatlog__timestamp">20-Apr-21 12:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="834023262237229126" id="message-834023262237229126">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention">@everyone</span>
+<strong>Goals for thursday&#39;s meeting (22/4/21)</strong>
+<strong>PID DEADLINE</strong>
+
+<span class="mention" title="Tee#3738">@Tee</span>
+<span class="pre pre--inline">- Implement output of test&#39;s information</span>
+<span class="pre pre--inline">- Edit the graphs display</span>
+
+<span class="mention" title="its_aeryk_23#3104">@its_aeryk_23</span> &amp; <span class="mention" title="DKhyng#0650">@Afonso</span>
+<span class="pre pre--inline">- Put the report together</span>
+<span class="pre pre--inline">- References (at least 10)</span>
+<span class="pre pre--inline">- Table that specifies what was accomplished or not</span>
+
+<span class="mention" title="Rui#6448">@Rui</span> &amp; <span class="mention" title="Leites#4709">@Leites</span>
+<span class="pre pre--inline">- Presentation structure</span>
+<span class="pre pre--inline">- Presentation writing and recording</span>
+
+<strong>Meetings:</strong>
+<span class="pre pre--inline">Tue:</span> 11-1pm
+<span class="pre pre--inline">Thu:</span> 2pm onwards
+
+<strong>Deliverables - One person to deliver</strong>
+
+23/4) PID document (60%)
+
+29/4) Presentation - 6:40 mins approx (40%)
+29/4) Demo - 6 mins approx</span>
+
+                                <span class="chatlog__edited-timestamp" title="20-Apr-21 12:13 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 19 message(s)</div>
+</div>
+
+</body>
+
+</html>
