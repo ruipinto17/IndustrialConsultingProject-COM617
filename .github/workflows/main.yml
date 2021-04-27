@@ -49,8 +49,10 @@ jobs:
             git pull
             cd IC_Artifact            
             sudo docker build -t jmeterimage:latest .
-            cd ../..
-            ls
+            cd ..
+            cd FrontEnd
+            docker build -t frontend:latest .
+            cd ..            
             sudo docker-compose down
             sudo docker-compose up -d
 
