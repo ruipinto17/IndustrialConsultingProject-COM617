@@ -20,7 +20,10 @@
           <p>Ramp up: <%= rampUpTime %></p>
         </div>
         <div id="currnetValues">
-          <p>Time interval(seconds):<%= tinterval %></p>
+          <p>Time interval(seconds): <%= tinterval %></p>
+        </div>
+        <div id="currnetValues">
+          <p>Time Range for Visuals(Hour): <%= timeRange%>h</p>
         </div>
       </div>
       <div class="form">
@@ -76,6 +79,17 @@
             required
           />
           <div class="labels">
+            <label for="interval">Time Range for Visuals(hours)</label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            name="range"
+            value="24"
+            min="1"
+            required
+          />
+          <div class="labels">
             <label for="engine">Start - Uncheck and submit to stop</label>
             <input type="checkbox" name="engine" value="true" checked />
           </div>
@@ -87,7 +101,7 @@
     <div class="fourth-row">
       <div id="Transactions Response Time ">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=23"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=23"
           width="950"
           height="200"
           frameborder="0"
@@ -95,7 +109,7 @@
       </div>
       <div id="Network-traffic">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=36"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=36"
           width="950"
           height="200"
           frameborder="0"
@@ -106,7 +120,7 @@
     <div class="top-row">
       <div id="total-requests">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=26"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=26"
           width="450"
           height="200"
           frameborder="0"
@@ -114,7 +128,7 @@
       </div>
       <div id="failed-requests">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=28"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=28"
           width="450"
           height="200"
           frameborder="0"
@@ -122,7 +136,7 @@
       </div>
       <div id="recieved-bytes">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=38"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=38"
           width="450"
           height="200"
           frameborder="0"
@@ -130,7 +144,7 @@
       </div>
       <div id="recieved-bytes-Mean">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=39"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=39"
           width="450"
           height="200"
           frameborder="0"
@@ -140,7 +154,7 @@
     <div class="second-row">
       <div id="recieved-bytes-Max">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=40"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=40"
           width="450"
           height="200"
           frameborder="0"
@@ -148,7 +162,7 @@
       </div>
       <div id="Send Bytes">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=37"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=37"
           width="450"
           height="200"
           frameborder="0"
@@ -156,7 +170,7 @@
       </div>
       <div id="Send Bytes Mean">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=41"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=41"
           width="450"
           height="200"
           frameborder="0"
@@ -164,7 +178,7 @@
       </div>
       <div id="Send Bytes Max">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=42"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=42"
           width="450"
           height="200"
           frameborder="0"
@@ -174,7 +188,7 @@
     <div class="third-row">
       <div id="Total Errors">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=2"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=2"
           width="700"
           height="300"
           frameborder="0"
@@ -182,7 +196,7 @@
       </div>
       <div id="Errors Rate %">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=29"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=29"
           width="450"
           height="300"
           frameborder="0"
@@ -190,7 +204,7 @@
       </div>
       <div id="Total Throughput">
         <iframe
-          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-24h&to=now&panelId=4"
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=4"
           width="450"
           height="200"
           frameborder="0"

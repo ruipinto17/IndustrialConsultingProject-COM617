@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
     let threadPool = "Not running";
     let rampUpTime = "Not running";
     let tinterval = "Not running";
+    let timeRange = "Not running";
 
     res.render("index", {
       title: "Home Page",
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
       threadPool: threadPool,
       rampUpTime: rampUpTime,
       tinterval: tinterval,
+      timeRange: 24,
     });
   } else {
     res.render("index", {
@@ -42,6 +44,7 @@ app.get("/", (req, res) => {
       rampUpTime: myCache.get("rampUpTime"),
       start: myCache.get("start"),
       tinterval: myCache.get("tinterval"),
+      timeRange: myCache.get("timeRange"),
     });
   }
 });
@@ -52,6 +55,7 @@ app.post("/", (req, res) => {
   let rampUpTime = req.body.RampUpTime;
   let engine = req.body.engine;
   let tinterval = req.body.interval;
+  let timeRange = req.body.range;
 
   let start;
   if (engine == null) {
@@ -60,15 +64,13 @@ app.post("/", (req, res) => {
     start = "true";
   }
   superagent
-    .post("http://webmontiortool.uksouth.cloudapp.azure.com:5000/")
+    .post("http://webmontiortool.uksouth.cloudapp.azure.com:5000/") //<- Open Socket on our Jmeter Application
     .set("threads", threadPool)
     .set("targeturl", targetUrl)
     .set("rampup", rampUpTime)
     .set("keeprunning", start)
     .set("timeinterval", tinterval)
-    .end((err, res) => {
-      // Calling the end function will send the request
-    });
+    .end((err, res) => {});
 
   if (start == "false") {
     myCache.mset([
@@ -77,6 +79,7 @@ app.post("/", (req, res) => {
       { key: "rampUpTime", val: "Not running" },
       { key: "engine", val: "Not running" },
       { key: "tinterval", val: "Not running" },
+      { key: "timeRange", val: 24 },
     ]);
   } else {
     myCache.mset([
@@ -85,6 +88,7 @@ app.post("/", (req, res) => {
       { key: "rampUpTime", val: rampUpTime },
       { key: "engine", val: engine },
       { key: "tinterval", val: tinterval },
+      { key: "timeRange", val: timeRange },
     ]);
   }
   res.render("index", {
@@ -94,6 +98,7 @@ app.post("/", (req, res) => {
     rampUpTime: myCache.get("rampUpTime"),
     start: myCache.get("start"),
     tinterval: myCache.get("tinterval"),
+    timeRange: myCache.get("timeRange"),
   });
 });
 

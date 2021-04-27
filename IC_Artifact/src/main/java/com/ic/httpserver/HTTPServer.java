@@ -113,7 +113,7 @@ public class HTTPServer {
             System.err.println("----- Creating ScheduledExecutor");
             exec = Executors.newScheduledThreadPool(1);
             System.err.println("----- Creating PerformanceTask");
-                                 task = new PerformanceTest(targetUrl, threads, rampup);
+            task = new PerformanceTest(targetUrl, threads, rampup);
             System.err.println("----- Run ScheduledExecutor");
             exec.scheduleAtFixedRate(task, 0,parseInt(timeInterval), TimeUnit.SECONDS);
             
