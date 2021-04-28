@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en-US" style="height: 100%">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <div class="Parameter-row">
+      <div class="CurrentTest">
+        <h2>Current Variables being test</h2>
+        <div id="currnetValues">
+          <p>Target Url: <%= targetUrl %></p>
+        </div>
+        <div id="currnetValues">
+          <p>ThreadPool: <%= threadPool %></p>
+        </div>
+        <div id="currnetValues">
+          <p>Ramp up: <%= rampUpTime %></p>
+        </div>
+        <div id="currnetValues">
+          <p>Time interval(seconds): <%= tinterval %></p>
+        </div>
+        <div id="currnetValues">
+          <p>Time Range for Visuals(Hour): <%= timeRange%></p>
+        </div>
+      </div>
+      <div class="form">
+        <form id="form" method="POST">
+          <div class="labels">
+            <label for="TargetUrl">Target URL</label>
+          </div>
+          <input
+            type="url"
+            class="form-control"
+            name="TargetUrl"
+            placeholder="www.yourwebsitehere.com"
+            value=""
+            required
+          />
+          <div class="labels">
+            <label for="ThreadPool">Thread pool</label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            name="ThreadPool"
+            placeholder="(between 1 and 10)"
+            value=""
+            min="1"
+            max="10"
+            required
+          />
+          <div class="labels">
+            <label for="RampUpTime">RampUp Time</label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            name="RampUpTime"
+            placeholder="(between 1 and 10)"
+            value=""
+            min="1"
+            max="10"
+            required
+          />
+          <div class="labels">
+            <label for="interval"
+              >Time interval(seconds - 5 seconds or Over)</label
+            >
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            name="interval"
+            value="60"
+            min="5"
+            required
+          />
+          <div class="labels">
+            <label for="interval">Time Range for Visuals(hours)</label>
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            name="range"
+            value="24"
+            min="1"
+            required
+          />
+          <div class="labels">
+            <label for="engine">Start - Uncheck and submit to stop</label>
+            <input type="checkbox" name="engine" value="true" checked />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="fourth-row">
+      <div id="Transactions Response Time ">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=23"
+          width="950"
+          height="200"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div id="Network-traffic">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=36"
+          width="950"
+          height="200"
+          frameborder="0"
+        ></iframe>
+      </div>
+    </div>
+
+    <div class="top-row">
+      <div id="total-requests">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=26"
+          width="450"
+          height="200"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div id="failed-requests">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=28"
+          width="450"
+          height="200"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div id="recieved-bytes">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=38"
+          width="450"
+          height="200"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div id="recieved-bytes-Mean">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=39"
+          width="450"
+          height="200"
+          frameborder="0"
+        ></iframe>
+      </div>
+    </div>
+    <div class="second-row">
+      <div id="recieved-bytes-Max">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=40"
+          width="450"
+          height="200"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div id="Send Bytes">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=37"
+          width="450"
+          height="200"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div id="Send Bytes Mean">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=41"
+          width="450"
+          height="200"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div id="Send Bytes Max">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=42"
+          width="450"
+          height="200"
+          frameborder="0"
+        ></iframe>
+      </div>
+    </div>
+    <div class="third-row">
+      <div id="Total Errors">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=2"
+          width="700"
+          height="300"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div id="Errors Rate %">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=29"
+          width="450"
+          height="300"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div id="Total Throughput">
+        <iframe
+          src="http://webmontiortool.uksouth.cloudapp.azure.com:3000/d-solo/oAYfgjXGk/jmetertestresults?orgId=1&refresh=5s&from=now-<%=timeRange %>h&to=now&panelId=4"
+          width="450"
+          height="200"
+          frameborder="0"
+        ></iframe>
+      </div>
+    </div>
+  </body>
+
+  <style>
+    .Parameter-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .form {
+      width: 500px;
+    }
+
+    .inputTestPlan {
+      width: 400px;
+      color: azure;
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
+    }
+    #testplanInput {
+      height: 200px;
+      width: 500px;
+    }
+
+    .CurrentTest {
+      width: 400px;
+      color: azure;
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
+    }
+    #currnetValues {
+      display: flex;
+      flex-direction: row;
+      font-size: 22px;
+    }
+
+    .top-row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+
+    .second-row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+
+    .third-row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+    .fourth-row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+    input[type="text"],
+    [type="number"],
+    [type="url"] {
+      width: 90%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 50%;
+      /*background-color: #4CAF50;*/
+      background-color: #7e8287;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    body {
+      background-color: #141619;
+      width: 1500px;
+    }
+
+    label {
+      color: white;
+    }
+  </style>
+</html>

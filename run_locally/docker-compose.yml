@@ -1,0 +1,66 @@
+version: "3"
+
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - grafana_network
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana.ini:/usr/share/grafana/conf/custom.ini
+      - ./grafana.ini:/usr/share/grafana/conf/sample.ini
+    environment:
+      - GF_INSTALL_PLUGINS=cloudspout-button-panel
+    depends_on:
+      - influxdb
+    restart: always
+
+  influxdb:
+    image: influxdb:1.8.4
+    container_name: influxdb
+    restart: always
+    ports:
+      - 443:8086
+    networks:
+      - grafana_network
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB=jmeter
+      - INFLUXDB_USER=ICPuser
+      - INFLUXDB_USER_PASSWORD=ICPpass
+      - INFLUXDB_ADMIN_ENABLED=true
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin
+    depends_on: 
+      - jmeter
+    restart: always
+
+  jmeter:
+    image: jmeterserver
+    container_name: jmeter
+    ports:
+      - 5008:5008
+    restart: always
+    
+
+  frontend:
+    image: frontend
+    container_name: webUI
+    ports:
+      - 8080:3000
+    restart: on-failure
+    depends_on:
+      - jmeter 
+
+
+networks:
+  grafana_network:
+volumes:
+  grafana_data:
+  influxdb_data:
