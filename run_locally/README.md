@@ -10,14 +10,14 @@ You will need:
 Head to the `run_locally` folder in your machine inside the terminal 
 make sure these PORTS are free [443,3000,8080,5008], if can not change them in the docker compose file in the `run_locally` folder
 then run these commands:
-cd IC_Artifact            
-sudo docker build -t jmeterimage:latest .
-cd ..
-cd FrontEnd
-docker build -t frontend:latest .
-cd ..            
-sudo docker-compose down
-sudo docker-compose up -d
+ - `cd IC_Artifact`            
+ - `sudo docker build -t jmeterimage:latest .`
+ - `cd ..`
+ - `cd FrontEnd`
+ - ` docker build -t frontend:latest .`
+ - `cd .. `           
+ - `sudo docker-compose down`
+ - `sudo docker-compose up -d`
 
 ## Second Step
 head to Grafana on your browser at: 
